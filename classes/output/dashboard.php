@@ -28,9 +28,8 @@ class dashboard implements \renderable, \templatable {
      * @return array
      */
     public function export_for_template(\renderer_base $output) {
-        global $CFG, $USER, $DB;
-
-        
+        global $CFG, $USER, $DB;      
+           
         $data = [
             'wwwroot' => $CFG->wwwroot
         ];
@@ -38,4 +37,18 @@ class dashboard implements \renderable, \templatable {
         return $data;
     }
 
+    /**
+     * Returns all Raspberry Pi's in the system
+     * @global \moodle_database $DB
+     */
+    private function getRaspberryPis() {
+        global $DB;
+        
+        $RPIS = new  \local_selfservehd\RaspberryPis();
+        $rpis = $RPIS->getResults();
+        
+        foreach ($rpis as $pi) {
+            
+        }
+    }
 }

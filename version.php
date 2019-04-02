@@ -35,3 +35,6 @@ $plugin->component = 'local_selfservehd';
 $plugin->release = '0.0.0';
 $plugin->requires = 2018051700;
 $plugin->maturity = MATURITY_ALPHA;
+$plugin->dependencies = array(
+    'local_buildings' => 2017080900,   // The Foo activity must be present (any version).
+);
