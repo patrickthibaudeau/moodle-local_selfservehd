@@ -2,13 +2,66 @@
 <div class="card-deck">
     <div class="card">
         <div class="card-header">
-           
+
         </div>
         <div class="card-body">
-           
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            {{#str}}mac_address, local_selfservehd{{/str}}
+                        </th>
+                        <th>
+                            {{#str}}ip_address, local_selfservehd{{/str}}
+                        </th>
+                        <th>
+                            {{#str}}room, local_selfservehd{{/str}}
+                        </th>
+                        <th>
+                            {{#str}}status, local_selfservehd{{/str}}
+                        </th>
+                        <th>
+                            {{#str}}actions, local_selfservehd{{/str}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#devices}}
+                    <tr>
+                        <td>
+                            {{{mac}}}
+                        </td>
+                        <td>
+                            {{{ip}}}
+                        </td>
+                        <td>
+                            {{{room}}}
+                        </td>
+                        <td>
+                            {{#status}}
+                            <i class="fa fa-circle" style="color: green"></i>
+                            {{/status}}
+                            {{^status}}
+                            <i class="fa fa-circle" style="color: red"></i>
+                            {{/status}}
+                        </td>
+                        <td>
+                            <a href="javascrip:void()" class="editRpi">
+                                <i class="fa fa-edit" ></i>
+                            </a>
+
+                            <a href="javascrip:void()" class="deleteRpi">
+                                <i class="fa fa-trash" style="color: red"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                    {{/devices}}
+                </tbody>
+            </table>
         </div>
     </div>
-    
+
 </div>
 
 

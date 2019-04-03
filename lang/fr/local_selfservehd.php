@@ -32,12 +32,12 @@ defined('MOODLE_INTERNAL') || die();
 
 
 $string['actions'] = 'Actions';
-$string['cannotaccesssystem'] = 'You don have permission to access this system.';
-$string['delete'] = 'Delete';
-$string['ip_address'] = 'IP Address';
-$string['mac_address'] = 'MAC Address';
-$string['pluginname'] = 'Self Serve help Desk';
-$string['room_not_set'] = 'Room not set';
-$string['room'] = 'Room';
+$string['cannotaccesssystem'] = 'Vous n\'avez pas la permission d\'accéder à ce système.';
+$string['delete'] = 'Supprimer';
+$string['ip_address'] = 'Adresse IP';
+$string['mac_address'] = 'Adresse MAC';
+$string['pluginname'] = 'Centre d\'assistance libre-service';
+$string['room_'] = 'Salle';
+$string['room_not_set'] = 'Salle non définie';
 $string['status'] = 'Status';
 

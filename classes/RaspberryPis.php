@@ -47,7 +47,7 @@ class RaspberryPis extends Devices {
      * 
      * @return \stdClass
      */
-    function getResults(): \stdClass {
+    function getResults() {
         return $this->results;
     }
 

@@ -31,9 +31,9 @@ class dashboard implements \renderable, \templatable {
         global $CFG, $USER, $DB;      
            
         $data = [
-            'wwwroot' => $CFG->wwwroot
+            'wwwroot' => $CFG->wwwroot,
+            'devices' => $this->getRaspberryPis()
         ];
-
         return $data;
     }
 
@@ -47,8 +47,18 @@ class dashboard implements \renderable, \templatable {
         $RPIS = new  \local_selfservehd\RaspberryPis();
         $rpis = $RPIS->getResults();
         
+        $rpiArray = [];
+        $i = 0;
         foreach ($rpis as $pi) {
-            
+            $PI = new \local_selfservehd\RaspberryPi($pi->id);
+            $rpiArray[$i]['id'] = $PI->getId();
+            $rpiArray[$i]['mac'] = $PI->getMac();
+            $rpiArray[$i]['ip'] = $PI->getIp();
+            $rpiArray[$i]['status'] = $PI->getIsAlive();
+            $i++;
+            unset($PI);
         }
+        
+        return $rpiArray;
     }
 }

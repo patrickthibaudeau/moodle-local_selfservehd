@@ -7,7 +7,7 @@ abstract class Device {
      * 
      * @global \moodle_database $DB
      */
-    public function insert(){
+    public function insert($data){
         global $DB;        
     }
     
@@ -15,7 +15,7 @@ abstract class Device {
      * 
      * @global \moodle_database $DB
      */
-    public function update(){
+    public function update($data){
         global $DB;        
     }
     
