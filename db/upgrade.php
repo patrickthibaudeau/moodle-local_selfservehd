@@ -40,22 +40,48 @@ function xmldb_local_selfservehd_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
-    
-    if ($oldversion < 2019032501) {
 
-        // Define field lastping to be added to local_sshd_rpi.
+    if ($oldversion < 2019040300) {
+
+        // Define field faqid to be added to local_sshd_rpi.
         $table = new xmldb_table('local_sshd_rpi');
-        $field = new xmldb_field('lastping', XMLDB_TYPE_INTEGER, '20', null,
-                null, null, '0', 'room_name');
+        $field = new xmldb_field('faqid', XMLDB_TYPE_INTEGER, '5', null, null,
+                null, '0', 'userid');
 
-        // Conditionally launch add field lastping.
+        // Conditionally launch add field faqid.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
 
+        // Define table local_sshd_faq to be created.
+        $table = new xmldb_table('local_sshd_faq');
+
+        // Adding fields to table local_sshd_faq.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL,
+                XMLDB_SEQUENCE, null);
+        $table->add_field('userid', XMLDB_TYPE_INTEGER, '20', null, null, null,
+                null);
+        $table->add_field('name', XMLDB_TYPE_CHAR, '1333', null, null, null,
+                null);
+        $table->add_field('message', XMLDB_TYPE_TEXT, null, null, null, null,
+                null);
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, null,
+                null, '0');
+        $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '20', null, null,
+                null, '0');
+
+        // Adding keys to table local_sshd_faq.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+        // Conditionally launch create table for local_sshd_faq.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
         // Selfservehd savepoint reached.
-        upgrade_plugin_savepoint(true, 2019032501, 'local', 'selfservehd');
+        upgrade_plugin_savepoint(true, 2019040300, 'local', 'selfservehd');
     }
+
 
     return true;
 }
