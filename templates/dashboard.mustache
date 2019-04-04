@@ -1,71 +1,40 @@
+<div class="card-body">
+    <div id="raspberryPiContainer">
+        <div class="card-deck">
+            {{#devices}}
+            <div class="card {{#status}}online{{/status}}{{^status}}offline{{/status}}">
+                <div class="card-header ">
+                    {{{room}}}
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#detailsModal{{{id}}}">
+                        <i class="fa fa-info-circle" ></i>
+                    </button>
+                    
+                    <a href="javascript:void(0);" class="editRpi btn btn-outline-primary" data-id="{{{id}}}" title="{{#str}}edit, local_selfservehd{{/str}}">
+                        <i class="fa fa-edit" ></i>
+                    </a>
 
-<div class="card-deck">
-    <div class="card">
-        <div class="card-header">
+                    <a href="javascript:void(0);"  class="rebootRpi btn btn-outline-success" data-id="{{{id}}}" title="{{#str}}reboot, local_selfservehd{{/str}}">
+                        <i class="fa fa-power-off" ></i>
+                    </a>
 
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                            {{#str}}mac_address, local_selfservehd{{/str}}
-                        </th>
-                        <th>
-                            {{#str}}ip_address, local_selfservehd{{/str}}
-                        </th>
-                        <th>
-                            {{#str}}room, local_selfservehd{{/str}}
-                        </th>
-                        <th>
-                            {{#str}}status, local_selfservehd{{/str}}
-                        </th>
-                        <th>
-                            {{#str}}actions, local_selfservehd{{/str}}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#devices}}
-                    <tr>
-                        <td>
-                            {{{mac}}}
-                        </td>
-                        <td>
-                            {{{ip}}}
-                        </td>
-                        <td>
-                            {{{room}}}
-                        </td>
-                        <td>
-                            {{#status}}
-                            <i class="fa fa-circle" style="color: green"></i>
-                            {{/status}}
-                            {{^status}}
-                            <i class="fa fa-circle" style="color: red"></i>
-                            {{/status}}
-                        </td>
-                        <td>
-                            <a href="javascrip:void()" class="editRpi">
-                                <i class="fa fa-edit" ></i>
-                            </a>
+                    <a href="javascript:void(0);"  class="deleteRpi btn btn-outline-danger" data-id="{{{id}}}" title="{{#str}}delete, local_selfservehd{{/str}}">
+                        <i class="fa fa-trash"></i>
+                    </a>
 
-                            <a href="javascrip:void()" class="deleteRpi">
-                                <i class="fa fa-trash" style="color: red"></i>
-                            </a>
-
-                        </td>
-                    </tr>
-                    {{/devices}}
-                </tbody>
-            </table>
+                {{> local_selfservehd/details_modal }}
+                </div>
+            </div>
+            {{/devices}}
         </div>
     </div>
-
 </div>
 
 
+
 {{> local_selfservehd/delete_modal }}
+{{> local_selfservehd/edit_modal }}
 {{#js}}
 require(['local_selfservehd/dashboard'], function(mod) {
 mod.init();

@@ -41,15 +41,21 @@ class RaspberryPi extends Device {
 
     /**
      *
-     * @var int 
+     * @var string 
      */
-    private $roomId;
+    private $buildingName;
 
     /**
      *
      * @var string 
      */
-    private $roomName;
+    private $buildingShortName;
+
+    /**
+     *
+     * @var string 
+     */
+    private $roomNumber;
 
     /**
      *
@@ -120,14 +126,9 @@ class RaspberryPi extends Device {
         $this->id = $id;
         $this->mac = $results->mac ?? '';
         $this->ip = "$results->ip" ?? '';
-        $this->roomId = $results->roomid ?? 0;
-        if (isset($results->roomid)) {
-            $ROOM = new \local_buildings\Room($results->roomid);
-            $this->roomName = $ROOM->getBuildingShortName() . ' ' . $ROOM->getRoomNumber();
-        } else {
-            $this->roomName = get_string('room_not_set', 'local_selfservehd');
-        }
-
+        $this->buildingName = $results->building_longname ?? 0;        
+        $this->buildingShortName = $results->building_shortname ?? 0;        
+        $this->roomNumber = $results->room_number ?? '';
         $this->lastPing = $results->lastping ?? 0;
         if (isset($results->lastping)) {
             $this->lastPingHr = date('F d, Y', $results->lastping);
@@ -210,12 +211,16 @@ class RaspberryPi extends Device {
         return $this->ip;
     }
 
-    public function getRoomId() {
-        return $this->roomId;
+    public function getBuildingName() {
+        return $this->buildingName;
     }
 
-    public function getRoomName() {
-        return $this->roomName;
+    public function getBuildingShortName() {
+        return $this->buildingShortName;
+    }
+
+    public function getRoomNumber() {
+        return $this->roomNumber;
     }
 
     public function getLastPing() {

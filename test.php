@@ -37,7 +37,8 @@ function display_page() {
     $pagetitle = get_string('pluginname', 'local_selfservehd');
     $pageheading = get_string('pluginname', 'local_selfservehd');
 
-    echo \local_selfservehd\Base::page($CFG->wwwroot . '/local/selfservehd/test.php', $pagetitle, $pageheading, $context);
+    echo \local_selfservehd\Base::page($CFG->wwwroot . '/local/selfservehd/test.php',
+            $pagetitle, $pageheading, $context);
 
 
 
@@ -50,13 +51,20 @@ function display_page() {
     //**********************
     //*** DISPLAY CONTENT **
     //**********************
+    $PI = new \local_selfservehd\RaspberryPi(2);
+    $connection = ssh2_connect($PI->getIp());
+    ssh2_auth_password($connection, 'pi', 'glendonglendon');
+    ssh2_exec($connection, 'sudo -S reboot < /home/pi/Documents/pwd');
+//    $shell = ssh2_shell($connection, 'xterm');
+//    fwrite($shell, 'cd /homw/pi/Documents' . PHP_EOL);
+//    fwrite($shell, './reboot.sh' . PHP_EOL);
+//    fwrite($shell, 'glendonglendon' . PHP_EOL);
 
     //**********************
     //*** DISPLAY FOOTER ***
     //**********************
     echo $OUTPUT->footer();
 }
-
 
 display_page();
 ?>

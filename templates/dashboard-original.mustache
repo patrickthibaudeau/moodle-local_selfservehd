@@ -1,0 +1,80 @@
+
+<div class="card-deck">
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            <div id="raspberryPiContainer">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                {{#str}}mac_address, local_selfservehd{{/str}}
+                            </th>
+                            <th>
+                                {{#str}}ip_address, local_selfservehd{{/str}}
+                            </th>
+                            <th>
+                                {{#str}}room, local_selfservehd{{/str}}
+                            </th>
+                            <th>
+                                {{#str}}status, local_selfservehd{{/str}}
+                            </th>
+                            <th>
+                                {{#str}}actions, local_selfservehd{{/str}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#devices}}
+                        <tr>
+                            <td>
+                                {{{mac}}}
+                             </td>
+                            <td>
+                                {{{ip}}}
+                            </td>
+                            <td>
+                                {{{room}}}
+                            </td>
+                            <td>
+                                {{#status}}
+                                <i class="fa fa-circle" style="color: green"></i>
+                                {{/status}}
+                                {{^status}}
+                                <i class="fa fa-circle" style="color: red"></i>
+                                {{/status}}
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="editRpi btn btn-outline-primary" data-id="{{{id}}}" title="{{#str}}edit, local_selfservehd{{/str}}">
+                                    <i class="fa fa-edit" ></i>
+                                </a>
+
+                                <a href="javascript:void(0);"  class="deleteRpi btn btn-outline-danger" data-id="{{{id}}}" title="{{#str}}delete, local_selfservehd{{/str}}">
+                                   <i class="fa fa-trash"></i>
+                                </a>
+
+                                <a href="javascript:void(0);"  class="rebootRpi btn btn-outline-success" data-id="{{{id}}}" title="{{#str}}reboot, local_selfservehd{{/str}}">
+                                   <i class="fa fa-power-off" ></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                        {{/devices}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{{> local_selfservehd/delete_modal }}
+{{> local_selfservehd/edit_modal }}
+{{#js}}
+require(['local_selfservehd/dashboard'], function(mod) {
+mod.init();
+});
+{{/js}}

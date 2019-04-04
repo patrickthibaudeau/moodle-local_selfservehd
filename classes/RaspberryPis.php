@@ -14,13 +14,13 @@ namespace local_selfservehd;
  * @author patrick
  */
 class RaspberryPis extends Devices {
-    
+
     /**
      * Returns all records in table
      * @var \stdClass   
      */
-    private $results; 
-    
+    private $results;
+
     /**
      * 
      * @global \stdClass $CFG
@@ -28,11 +28,10 @@ class RaspberryPis extends Devices {
      */
     public function __construct() {
         global $CFG, $DB;
-        
+
         $this->results = $DB->get_records('local_sshd_rpi');
-        
     }
-    
+
     /**
      * Returns an array of stdClass objects
      * Each object contains the following fields
@@ -51,8 +50,65 @@ class RaspberryPis extends Devices {
         return $this->results;
     }
 
-        
     public function getHtml() {
-        parent::getHtml();
+        $results = $this->getResults();
+
+        $html = '<table class="table table-striped">';
+        $html .= '    <thead>';
+        $html .= '        <tr>';
+        $html .= '            <th>';
+        $html .= get_string('mac_address', 'local_selfservehd');
+        $html .= '            </th>';
+        $html .= '            <th>';
+        $html .= get_string('ip_address', 'local_selfservehd');
+        $html .= '            </th>';
+        $html .= '            <th>';
+        $html .= get_string('room', 'local_selfservehd');
+        $html .= '            </th>';
+        $html .= '            <th>';
+        $html .= get_string('status', 'local_selfservehd');
+        $html .= '            </th>';
+        $html .= '            <th>';
+        $html .= get_string('actions', 'local_selfservehd');
+        $html .= '            </th>';
+        $html .= '        </tr>';
+        $html .= '    </thead>';
+        $html .= '    <tbody>';
+        foreach ($results as $pi) {
+            $PI = new RaspberryPi($pi->id);
+            $html .= '        <tr>';
+            $html .= '            <td>';
+            $html .= $PI->getMac();
+            $html .= '             </td>';
+            $html .= '            <td>';
+            $html .= $PI->getIp();
+            $html .= '            </td>';
+            $html .= '            <td>';
+            $html .= $PI->getBuildingShortName() . ' ' . $PI->getRoomNumber();
+            $html .= '            </td>';
+            $html .= '            <td>';
+            if ($PI->getIsAlive()) {
+            $html .= '<i class="fa fa-circle" style="color: green"></i>';
+            } else {
+            $html .= '<i class="fa fa-circle" style="color: red"></i>';
+            }
+            $html .= '            </td>';
+            $html .= '            <td>';
+            $html .= '<a href="javascript:void(0);" class="editRpi" data-id="' . $PI->getId() . '" title="' . get_string('edit', 'local_selfservehd') . '">';
+            $html .= '    <i class="fa fa-edit" ></i>';
+            $html .= '</a>';
+            $html .= '';
+            $html .= '<a href="javascript:void(0);"  class="deleteRpi"  data-id="' . $PI->getId() . '" title="' . get_string('delete', 'local_selfservehd') . '">';
+            $html .= '   <i class="fa fa-trash" style="color: red"></i>';
+            $html .= '</a>';
+            $html .= '';
+            $html .= '            </td>';
+            $html .= '        </tr>';
+        }
+        $html .= '    </tbody>';
+        $html .= '</table>';
+
+        return $html;
     }
+
 }

@@ -47,6 +47,7 @@ class Base {
         $PAGE->requires->css('/local/selfservehd/js/select2-4.0.3/dist/css/select2.min.css');
         $PAGE->requires->css('/local/selfservehd/js/editor/dist/summernote-bs4.css');
         $PAGE->requires->css('/local/selfservehd/css/jquery-ui.min.css');
+        $PAGE->requires->css('/local/selfservehd/css/dashboard.css');
         $PAGE->requires->strings_for_js(array_keys($strings), 'local_selfservehd');
     }
 
@@ -111,5 +112,4 @@ class Base {
             return $DB->get_record('user', array('idnumber' => $idNumber));
         }
     }
-
 }

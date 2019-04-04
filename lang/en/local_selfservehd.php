@@ -32,12 +32,23 @@ defined('MOODLE_INTERNAL') || die();
 
 
 $string['actions'] = 'Actions';
+$string['building_abbreviation'] = 'Build short name';
+$string['building_name'] = 'Building name';
 $string['cannotaccesssystem'] = 'You don have permission to access this system.';
+$string['close'] = 'Close';
 $string['delete'] = 'Delete';
+$string['delete_confirmation'] = 'Are you sure you want to delete this device. If it is still on the network and communicationg with this server, it will be recreated.';
+$string['details'] = 'Details';
+$string['edit'] = 'Edit';
 $string['ip_address'] = 'IP Address';
 $string['mac_address'] = 'MAC Address';
 $string['pluginname'] = 'Self Serve help Desk';
-$string['room_not_set'] = 'Room not set';
+$string['reboot'] = 'Reboot';
+$string['request_help'] = 'Request help';
 $string['room'] = 'Room';
+$string['room_number'] = 'Room number';
+$string['room_not_set'] = 'Room not set';
+$string['save'] = 'Save';
 $string['status'] = 'Status';
+$string['selfservehd:rpi'] = 'Raspberry PI access';
 

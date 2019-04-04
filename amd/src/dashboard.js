@@ -7,37 +7,59 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
      * @returns {undefined}
      */
     function initDashboard() {
-        initPreviewModal();
+        initEditModal();
         initDeleteModal();
+        rebootPi()
     }
 
     /**
      * Holds all functionality for the user select box
      * @returns {undefined}
      */
-    function initPreviewModal() {
+    function initEditModal() {
         var wwwroot = M.cfg.wwwroot;
 
-        $(".preview").click(function () {
+        $(".editRpi").click(function () {
+            $('#savePiBtn').unbind();
             var id = $(this).data('id');
-            $('#preview-subject').html(id);
             $.ajax({
-                url: wwwroot + '/local/selfservehd/ajax/messages.php?action=preview&templateid=' + id,
+                url: wwwroot + '/local/selfservehd/ajax/dashboard.php?action=getInfo&id=' + id,
                 dataType: 'json',
-                success: function (preview) {
-                    console.log(preview.subject);
-                    $('#preview-name').html(preview.name);
-                    $('#preview-subject').html(preview.subject);
-                    $('#preview-content').html(preview.content);
+                success: function (results) {
+                    console.log(results);
+                    $('#piId').val(id);
+                    $('#buildingName').val(results.building_longname);
+                    $('#buildingShortName').val(results.building_shortname);
+                    $('#roomNumber').val(results.room_number);
                 },
                 error: function (e) {
                     console.log(e);
                 }
             });
 
-            $("#previewModal").modal({
+            $("#editModal").modal({
                 show: true,
                 focus: true
+            });
+
+            $('#savePiBtn').click(function () {
+                var formData = $('#editPiForm').serialize();
+                console.log(formData);
+                $.ajax({
+                    url: wwwroot + '/local/selfservehd/ajax/dashboard.php?action=save',
+                    data: formData,
+                    dataType: 'html',
+                    success: function (results) {
+                        console.log(results);
+                        $('#raspberryPiContainer').html(results);
+                        $("#editModal").modal('hide');
+                        initDashboard();
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+
             });
         });
 
@@ -46,9 +68,10 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
     function initDeleteModal() {
         var wwwroot = M.cfg.wwwroot;
 
-        $('.delete-message').click(function () {
+        $('.deleteRpi').click(function () {
             var id = $(this).data('id');
-            var content = M.util.get_string('delete_message_confirmation', 'local_selfservehd');
+            console.log(id);
+            var content = M.util.get_string('delete_confirmation', 'local_selfservehd');
             $('#delete-content').html(content);
             $("#deleteModal").modal({
                 show: true,
@@ -56,7 +79,7 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
             });
             $('#deleteBtn').click(function () {
                 $.ajax({
-                    url: wwwroot + '/local/selfservehd/ajax/messages?action=deleteMessage&templateid=' + id,
+                    url: wwwroot + '/local/selfservehd/ajax/dashboard.php?action=delete&id=' + id,
                     dataType: 'text',
                     success: function (deleted) {
                         location.reload();
@@ -66,6 +89,28 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
                     }
                 });
             });
+        });
+    }
+
+    function rebootPi() {
+        var wwwroot = M.cfg.wwwroot;
+
+        $('.rebootRpi').click(function () {
+            var id = $(this).data('id');
+            console.log(id);
+
+            $.ajax({
+                url: wwwroot + '/local/selfservehd/ajax/dashboard.php?action=reboot&id=' + id,
+                dataType: 'text',
+                success: function (rebooted) {
+                    alert('System is rebooting');
+                    initDashboard();
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+
         });
     }
 

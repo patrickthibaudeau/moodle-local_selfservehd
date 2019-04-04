@@ -54,6 +54,7 @@ class dashboard implements \renderable, \templatable {
             $rpiArray[$i]['id'] = $PI->getId();
             $rpiArray[$i]['mac'] = $PI->getMac();
             $rpiArray[$i]['ip'] = $PI->getIp();
+            $rpiArray[$i]['room'] = $PI->getBuildingShortName() . ' ' . $PI->getRoomNumber();
             $rpiArray[$i]['status'] = $PI->getIsAlive();
             $i++;
             unset($PI);
