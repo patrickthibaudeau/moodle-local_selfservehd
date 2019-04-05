@@ -33,11 +33,16 @@ function display_page() {
     require_login(1, false); //Use course 1 because this has nothing to do with an actual course, just like course 1
 
     $context = context_system::instance();
+    
+    if ((!has_capability('local/selfservehd:admin', $context))) {
+        redirect($CFG->wwwroot,
+                get_string('no_permission', 'local_selfservehd'), 5);
+    }
 
-    $pagetitle = get_string('pluginname', 'local_selfservehd');
-    $pageheading = get_string('pluginname', 'local_selfservehd');
+    $pagetitle = get_string('faqs', 'local_selfservehd');
+    $pageheading = get_string('faqs', 'local_selfservehd');
 
-    echo \local_selfservehd\Base::page($CFG->wwwroot . '/local/selfservehd/index.php',
+    echo \local_selfservehd\Base::page($CFG->wwwroot . '/local/selfservehd/faqs.php',
             $pagetitle, $pageheading, $context);
 
 
@@ -50,11 +55,10 @@ function display_page() {
     //*** DISPLAY CONTENT **
     //**********************
     $output = $PAGE->get_renderer('local_selfservehd');
-    $dashboard = new \local_selfservehd\output\dashboard();
+    $faqs = new \local_selfservehd\output\faqs();
 
-//    $PAGE->requires->js_call_amd('local_selfservehd/menu', 'init');
-    echo '<div id="deviceContainer">';
-    echo $output->render_dashboard($dashboard);
+    echo '<div id="faqsContainer">';
+    echo $output->render_faqs($faqs);
     echo '</div>';
     //**********************
     //*** DISPLAY FOOTER ***

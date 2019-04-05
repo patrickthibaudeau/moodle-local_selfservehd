@@ -31,6 +31,11 @@ class renderer extends \plugin_renderer_base {
         $data = $dashboard->export_for_template($this);
         return $this->render_from_template('local_selfservehd/dashboard', $data);
     }
+    
+    public function render_faqs(\templatable $faqs) {
+        $data = $faqs->export_for_template($this);
+        return $this->render_from_template('local_selfservehd/faqs', $data);
+    }
 
     
 }

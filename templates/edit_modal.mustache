@@ -14,16 +14,24 @@
                             <form id="editPiForm">
                                 <input type="hidden" name="id" id="piId" value="">
                                 <div class="form-group">
-                                    <label for="buildingName">{{#str}}building_name, local_selfservehd{{/str}}</label>
-                                    <input type="text" class="form-control" id="buildingName" name="building_name" value="">
+                                    <label for="buildingLongName">{{#str}}building_name, local_selfservehd{{/str}}</label>
+                                    <input type="text" class="form-control" id="buildingLongName" name="building_name" value="">
                                 </div>
                                 <div class="form-group">
                                     <label for="buildingShortName">{{#str}}building_abbreviation, local_selfservehd{{/str}}</label>
-                                    <input type="text" class="form-control" id="buildingShortNmaeame" name="building_shortname" value="">
+                                    <input type="text" class="form-control" id="buildingShortName" name="building_shortname" value="">
                                 </div>
                                 <div class="form-group">
                                     <label for="roomNumber">{{#str}}room_number, local_selfservehd{{/str}}</label>
                                     <input type="text" class="form-control" id="roomNumber" name="room_number" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="faqId">{{#str}}associated_faq, local_selfservehd{{/str}}</label>
+                                    <select class="form-control" id="faqId" name="faqid">
+                                        {{#faqs}}
+                                        <option value="{{id}}">{{name}}</option>
+                                        {{/faqs}}
+                                    </select>
                                 </div>
                             </form>
                         </div>

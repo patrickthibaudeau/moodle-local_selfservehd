@@ -13,7 +13,7 @@ namespace local_selfservehd;
  *
  * @author patrick
  */
-class RaspberryPi extends Device {
+class Faq extends Device {
 
     /**
      *
@@ -31,49 +31,25 @@ class RaspberryPi extends Device {
      *
      * @var string 
      */
-    private $mac;
+    private $userName;
 
     /**
      *
      * @var string 
      */
-    private $ip;
-    
-    /**
-     *
-     * @var string 
-     */
-    private $faqId;
+    private $name;
 
     /**
      *
      * @var string 
      */
-    private $buildingName;
+    private $messageEn;
 
     /**
      *
      * @var string 
      */
-    private $buildingShortName;
-
-    /**
-     *
-     * @var string 
-     */
-    private $roomNumber;
-
-    /**
-     *
-     * @var int 
-     */
-    private $lastPing;
-
-    /**
-     * Human readable
-     * @var string 
-     */
-    private $lastPingHr;
+    private $messageFr;
 
     /**
      *
@@ -98,13 +74,13 @@ class RaspberryPi extends Device {
      * @var string 
      */
     private $timeModifiedHr;
-    
+
     /**
      *
      * @var string 
      */
     private $dbTable;
-    
+
     /**
      *
      * @var bool 
@@ -120,8 +96,9 @@ class RaspberryPi extends Device {
      */
     public function __construct($id = 0) {
         global $CFG, $DB, $USER;
-        
-        $this->dbTable = 'local_sshd_rpi';
+
+        $this->dbTable = 'local_sshd_faq';
+        $context = \context_system::instance();
 
         if ($id) {
             $results = $DB->get_record($this->dbTable, ['id' => $id]);
@@ -130,26 +107,38 @@ class RaspberryPi extends Device {
         }
 
         $this->id = $id;
-        $this->mac = $results->mac ?? '';
-        $this->ip = $results->ip ?? '';
-        $this->faqId = $results->faqid ?? 0;
-        $this->buildingName = $results->building_longname ?? 0;        
-        $this->buildingShortName = $results->building_shortname ?? 0;        
-        $this->roomNumber = $results->room_number ?? '';
-        $this->lastPing = $results->lastping ?? 0;
-        if (isset($results->lastping)) {
-            $this->lastPingHr = date('F d, Y', $results->lastping);
-            
-            //Calculate if device is alive
-            $difference = time() - $results->lastping;
-            if ($difference <= 300) {
-                $this->isAlive = true;
-            } else {
-                $this->isAlive = false;
-            }
-         } else {
-            $this->lastPingHr = '';
-            $this->isAlive = false;
+        $this->name = $results->name ?? '';
+        if (isset($results->message_en)) {
+            $contentEnUrls = file_rewrite_pluginfile_urls($results->message_en,
+                    'pluginfile.php', $context->id, 'local_selfservehd', 'faqen',
+                    $results->id);
+            $contentEn = format_text($contentEnUrls, $results->message_en,
+                    \local_selfservehd\Base::getEditorOptions($context),
+                    $context);
+            $this->messageEn = $contentEn;
+        } else {
+            $this->messageEn = '';
+        }
+        
+        if (isset($results->message_fr)) {
+            $contentFrUrls = file_rewrite_pluginfile_urls($results->message_fr,
+                    'pluginfile.php', $context->id, 'local_selfservehd', 'faqfr',
+                    $results->id);
+            $contentFr = format_text($contentFrUrls, $results->message_fr,
+                    \local_selfservehd\Base::getEditorOptions($context),
+                    $context);
+            $this->messageFr = $contentFr;
+        } else {
+            $this->messageFr = '';
+        }
+
+        $this->userId = $results->userid ?? 0;
+
+        if (isset($results->userid)) {
+            $user = $DB->get_record('user', ['id' => $results->userid]);
+            $this->userName = fullname($user);
+        } else {
+            $this->userName = '';
         }
 
         $this->timeCreated = $results->timecreated ?? 0;
@@ -173,10 +162,10 @@ class RaspberryPi extends Device {
      */
     public function insert($data) {
         global $DB;
-        
+
         $data['timecreated'] = time();
         $data['timemodified'] = time();
-        
+
         $DB->insert_record($this->dbTable, $data);
     }
 
@@ -186,9 +175,9 @@ class RaspberryPi extends Device {
      */
     public function update($data) {
         global $DB;
-  
+
         $data['timemodified'] = time();
-        
+
         $DB->update_record($this->dbTable, $data);
     }
 
@@ -198,8 +187,8 @@ class RaspberryPi extends Device {
      */
     public function delete() {
         global $DB;
-        
-        $DB->delete_records($this->dbTable,['id' => $this->id] );
+
+        $DB->delete_records($this->dbTable, ['id' => $this->id]);
     }
 
     public function getId() {
@@ -210,36 +199,20 @@ class RaspberryPi extends Device {
         return $this->userId;
     }
 
-    public function getMac() {
-        return $this->mac;
+    public function getUserName() {
+        return $this->userName;
     }
 
-    public function getIp() {
-        return $this->ip;
-    }
-    
-    public function getFaqId() {
-        return $this->faqId;
+    public function getName() {
+        return $this->name;
     }
 
-    public function getBuildingName() {
-        return $this->buildingName;
+    public function getMessageEn() {
+        return $this->messageEn;
     }
 
-    public function getBuildingShortName() {
-        return $this->buildingShortName;
-    }
-
-    public function getRoomNumber() {
-        return $this->roomNumber;
-    }
-
-    public function getLastPing() {
-        return $this->lastPing;
-    }
-
-    public function getLastPingHr() {
-        return $this->lastPingHr;
+    public function getMessageFr() {
+        return $this->messageFr;
     }
 
     public function getTimeCreated() {
@@ -258,10 +231,12 @@ class RaspberryPi extends Device {
         return $this->timeModifiedHr;
     }
 
+    public function getDbTable() {
+        return $this->dbTable;
+    }
+
     public function getIsAlive() {
         return $this->isAlive;
     }
-
-
 
 }

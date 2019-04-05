@@ -27,8 +27,9 @@ switch ($action) {
         $PI = new \local_selfservehd\RaspberryPi($id);
         $data = [];
         $data['building_longname'] = $PI->getBuildingName();
-        $data['building_shortgname'] = $PI->getBuildingShortName();
+        $data['building_shortname'] = $PI->getBuildingShortName();
         $data['room_number'] = $PI->getRoomNumber();
+        $data['faqid'] = $PI->getFaqId();
 
         echo json_encode($data);
         break;
@@ -38,6 +39,7 @@ switch ($action) {
         $buildingLongName = optional_param('building_longname', '', PARAM_TEXT);
         $buildingShortName = optional_param('building_shortname', '', PARAM_TEXT);
         $roomNumber = optional_param('room_number', '', PARAM_TEXT);
+        $faqId = required_param('faqid', PARAM_INT);
 
         $data = [];
         $data['id'] = $id;
@@ -45,6 +47,7 @@ switch ($action) {
         $data['building_longname'] = $buildingLongName;
         $data['building_shortname'] = $buildingShortName;
         $data['room_number'] = $roomNumber;
+        $data['faqid'] = $faqId;
 
         $PI = new \local_selfservehd\RaspberryPi($id);
         $PI->update($data);
@@ -65,6 +68,11 @@ switch ($action) {
 //        ssh2_exec($connection, 'reboot');
         ssh2_exec($connection, 'sudo -S reboot < /home/pi/.reboot');
         echo true;
+        break;
+    case 'reload':
+        $output = $PAGE->get_renderer('local_selfservehd');
+        $dashboard = new \local_selfservehd\output\dashboard();
+        echo $output->render_dashboard($dashboard);
         break;
 }
 

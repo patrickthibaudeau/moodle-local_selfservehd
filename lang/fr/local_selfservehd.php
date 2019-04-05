@@ -30,14 +30,35 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-
 $string['actions'] = 'Actions';
+$string['associated_faq'] = 'FAQ associer';
+$string['building_abbreviation'] = 'Nom abrégé du bâtiment';
+$string['building_name'] = 'Nom du bâtiment';
 $string['cannotaccesssystem'] = 'Vous n\'avez pas la permission d\'accéder à ce système.';
+$string['close'] = 'Fermer';
+$string['dashboard'] = 'Tableau de bord';
 $string['delete'] = 'Supprimer';
+$string['delete_confirmation'] = 'Êtes-vous sûr de vouloir supprimer ce périphérique? S\'il est toujours sur le réseau et qu\'il communique avec ce serveur, il sera recréé.';
+$string['delete_faq_confirmation'] = 'Êtes-vous sûr de vouloir supprimer ce faq?';
+$string['details'] = 'Details';
+$string['edit'] = 'Modifier';
+$string['faqs'] = 'FAQs';
+$string['faq'] = 'FAQ';
 $string['ip_address'] = 'Adresse IP';
 $string['mac_address'] = 'Adresse MAC';
+$string['message'] = 'Message';
+$string['message_en'] = 'Message (English)';
+$string['message_fr'] = 'Message (Français)';
+$string['name'] = 'Nom';
+$string['new_template'] = 'Nouveau modèle';
 $string['pluginname'] = 'Centre d\'assistance libre-service';
+$string['reboot'] = 'Redémarrer';
+$string['request_help'] = 'Demande d\'aide';
+$string['required_field'] = 'Ce champ est requis';
 $string['room_'] = 'Salle';
 $string['room_not_set'] = 'Salle non définie';
+$string['room_number'] = 'Numéro de salle';
+$string['save'] = 'Enregistrer';
 $string['status'] = 'Status';
 
+$string['selfservehd:rpi'] = 'Raspberry PI access';

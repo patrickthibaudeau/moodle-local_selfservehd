@@ -9,7 +9,8 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
     function initDashboard() {
         initEditModal();
         initDeleteModal();
-        rebootPi()
+        rebootPi();
+        reloadContents();
     }
 
     /**
@@ -28,9 +29,10 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
                 success: function (results) {
                     console.log(results);
                     $('#piId').val(id);
-                    $('#buildingName').val(results.building_longname);
+                    $('#buildingLongName').val(results.building_longname);
                     $('#buildingShortName').val(results.building_shortname);
                     $('#roomNumber').val(results.room_number);
+                    $('#faqId').val(results.faqid);
                 },
                 error: function (e) {
                     console.log(e);
@@ -112,6 +114,30 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
             });
 
         });
+    }
+
+    /**
+     * This will reload through ajax the devices
+     * every 2 minutes.
+     */
+    function reloadContents() {
+        var wwwroot = M.cfg.wwwroot;
+
+        setInterval(function () {
+            $('.modal').modal('hide');
+            $.ajax({
+                url: wwwroot + '/local/selfservehd/ajax/dashboard.php?action=reload',
+                dataType: 'html',
+                success: function (result) {                    
+                    $('#deviceContainer').html(result);                    
+                    initDashboard();
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }, 1000 * 60 * 2);
+
     }
 
     return {

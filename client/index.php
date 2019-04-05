@@ -7,6 +7,7 @@ and open the template in the editor.
 <?php
 include_once('../config.php');
 $IP = $_SERVER['REMOTE_ADDR'];
+ 
 ?>
 <html>
     <head>

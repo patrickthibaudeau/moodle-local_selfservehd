@@ -19,3 +19,7 @@ require_once(dirname(__FILE__) . '../../../config.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/Base.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/Device.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/Devices.php');
+require_once($CFG->dirroot . '/local/selfservehd/classes/Faq.php');
+require_once($CFG->dirroot . '/local/selfservehd/classes/Faqs.php');
+require_once($CFG->dirroot . '/local/selfservehd/classes/RaspberryPi.php');
+require_once($CFG->dirroot . '/local/selfservehd/classes/RaspberryPis.php');

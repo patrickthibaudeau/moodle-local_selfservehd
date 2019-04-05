@@ -4,7 +4,7 @@
 
     cd Documents
     nano sendmac.sh
-Copy past the following code. Remember to change the HOST variable to your Moodle URL. Also remember to change the TOKEN variable .
+Copy paste the following code. Remember to change the HOST variable to your Moodle URL. Also remember to change the TOKEN variable .
 
     #!/bin/bash
     #Enter the host address of your moodle server

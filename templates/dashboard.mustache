@@ -1,37 +1,40 @@
-<div class="card-body">
-    <div id="raspberryPiContainer">
-        <div class="card-deck">
-            {{#devices}}
-            <div class="card {{#status}}online{{/status}}{{^status}}offline{{/status}}">
-                <div class="card-header ">
-                    {{{room}}}
-                </div>
-                <div class="card-body">
-                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#detailsModal{{{id}}}">
-                        <i class="fa fa-info-circle" ></i>
-                    </button>
-                    
-                    <a href="javascript:void(0);" class="editRpi btn btn-outline-primary" data-id="{{{id}}}" title="{{#str}}edit, local_selfservehd{{/str}}">
-                        <i class="fa fa-edit" ></i>
-                    </a>
-
-                    <a href="javascript:void(0);"  class="rebootRpi btn btn-outline-success" data-id="{{{id}}}" title="{{#str}}reboot, local_selfservehd{{/str}}">
-                        <i class="fa fa-power-off" ></i>
-                    </a>
-
-                    <a href="javascript:void(0);"  class="deleteRpi btn btn-outline-danger" data-id="{{{id}}}" title="{{#str}}delete, local_selfservehd{{/str}}">
-                        <i class="fa fa-trash"></i>
-                    </a>
-
-                {{> local_selfservehd/details_modal }}
-                </div>
-            </div>
-            {{/devices}}
+<div class="row">
+    <div class="container-fluid">
+        <div class="float-right">
+            <a href="faqs.php" class="btn btn-outline-primary" title="{{#str}}faqs, local_selfservehd{{/str}}">{{#str}}faqs, local_selfservehd{{/str}}</a>
         </div>
     </div>
 </div>
+<div class="card-body">   
+    <div class="card-deck">
+        {{#devices}}
+        <div class="card {{#status}}online{{/status}}{{^status}}offline{{/status}}">
+            <div class="card-header ">
+                {{{room}}}
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#detailsModal{{{id}}}">
+                    <i class="fa fa-info-circle" ></i>
+                </button>
 
+                <a href="javascript:void(0);" class="editRpi btn btn-outline-primary" data-id="{{{id}}}" title="{{#str}}edit, local_selfservehd{{/str}}">
+                    <i class="fa fa-edit" ></i>
+                </a>
 
+                <a href="javascript:void(0);"  class="rebootRpi btn btn-outline-success" data-id="{{{id}}}" title="{{#str}}reboot, local_selfservehd{{/str}}">
+                    <i class="fa fa-power-off" ></i>
+                </a>
+
+                <a href="javascript:void(0);"  class="deleteRpi btn btn-outline-danger" data-id="{{{id}}}" title="{{#str}}delete, local_selfservehd{{/str}}">
+                    <i class="fa fa-trash"></i>
+                </a>
+
+                {{> local_selfservehd/details_modal }}
+            </div>
+        </div>
+        {{/devices}}
+    </div>
+</div>
 
 {{> local_selfservehd/delete_modal }}
 {{> local_selfservehd/edit_modal }}
