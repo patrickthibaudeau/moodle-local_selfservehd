@@ -92,7 +92,7 @@ Copy the following code
          }
     });
 
-Reboot your pi the regular way.
+Reboot your pi the regular way. Then you will be able to simply write reboot to reboot your pi.
 
 
 > Written with [StackEdit](https://stackedit.io/).
