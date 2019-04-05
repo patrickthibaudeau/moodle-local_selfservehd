@@ -58,6 +58,7 @@ Add the following code
 ### Set password file in order to reboot remotely
 The system allows us to reboot through ssh. The only way I have found to make this work so far is by adding a file in the pi with the password and then using the sudo -S command to call this file.
 From the /home/pi folder create a new file called .reboot
+
     nano .reboot
     Enter your password for the pi user and save
 
