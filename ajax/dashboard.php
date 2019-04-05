@@ -65,7 +65,6 @@ switch ($action) {
         $PI = new \local_selfservehd\RaspberryPi($id);
         $connection = ssh2_connect($PI->getIp());
         ssh2_auth_password($connection, 'pi', 'glendonglendon');
-//        ssh2_exec($connection, 'reboot');
         ssh2_exec($connection, 'sudo -S reboot < /home/pi/.reboot');
         echo true;
         break;

@@ -1,4 +1,5 @@
 
+
 ## Raspberry PI configuration
 
 ### Create bash script in /home/pi/Documents
@@ -54,9 +55,15 @@ Add the following code
     @sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
     @chromium-browser --noerrdialogs --disable-infobars --kiosk --app=https://your_moodle_server/local/selfservehd/client/
 
-### Reboot without requiring password
-The system allows us to reboot through ssh. However, we don't want to use sudo as we can't enter a password. There are various ways of doing this, but we feel that this is the most secure way.
-Thank you to Kevin Friedberg for this solution
+### Set password file in order to reboot remotely
+The system allows us to reboot through ssh. The only way I have found to make this work so far is by adding a file in the pi with the password and then using the sudo -S command to call this file.
+From the /home/pi folder create a new file called .reboot
+    nano .reboot
+    Enter your password for the pi user and save
+
+### Reboot without requiring password (Doesn't work.)
+The system allows us to reboot through ssh. 
+Thank you to Kevin Friedberg for this solution. However, I haven't managed to make it work with php ssh2. It does work great when I use putty :)
 
     cd /etc/polkit-1/localauthority/50-local.d/
     sudo nano 10-nopasswd_pi_reboot.pkla
@@ -88,4 +95,3 @@ Reboot your pi the regular way.
 
 
 > Written with [StackEdit](https://stackedit.io/).
-

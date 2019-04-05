@@ -98,6 +98,7 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
         var wwwroot = M.cfg.wwwroot;
 
         $('.rebootRpi').click(function () {
+            $('.rebootRpi').unbind();
             var id = $(this).data('id');
             console.log(id);
 
@@ -128,8 +129,8 @@ define(['jquery', 'jqueryui', 'local_selfservehd/select2'], function ($, jqui, s
             $.ajax({
                 url: wwwroot + '/local/selfservehd/ajax/dashboard.php?action=reload',
                 dataType: 'html',
-                success: function (result) {                    
-                    $('#deviceContainer').html(result);                    
+                success: function (result) {
+                    $('#deviceContainer').html(result);
                     initDashboard();
                 },
                 error: function (e) {
