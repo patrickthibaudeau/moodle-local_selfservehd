@@ -3,12 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/hostdata/www/html/moodle/local/selfservehd/templates/dashboard.mustache</file>
-            <file>file:/hostdata/www/html/moodle/local/selfservehd/classes/RaspberryPis.php</file>
-            <file>file:/hostdata/www/html/moodle/local/selfservehd/config.php</file>
-            <file>file:/hostdata/www/html/moodle/local/selfservehd/classes/Devices.php</file>
-            <file>file:/hostdata/www/html/moodle/local/selfservehd/classes/Device.php</file>
-            <file>file:/hostdata/www/html/moodle/local/selfservehd/index.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/classes/Faq.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/faq_form.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/classes/output/dashboard.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/templates/faqs.mustache</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/amd/src/dashboard.js</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/ajax/faq.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/templates/edit_modal.mustache</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/classes/output/faqs.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/lang/en/local_selfservehd.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/classes/RaspberryPi.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/lang/fr/local_selfservehd.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/amd/src/faqs.js</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/lib.php</file>
+            <file>file:/hostdata/www/html/moodle/local/selfservehd/ajax/dashboard.php</file>
         </group>
     </open-files>
 </project-private>

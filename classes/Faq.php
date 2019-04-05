@@ -96,6 +96,7 @@ class Faq extends Device {
      */
     public function __construct($id = 0) {
         global $CFG, $DB, $USER;
+        include_once($CFG->dirroot . '/lib/filelib.php');
 
         $this->dbTable = 'local_sshd_faq';
         $context = \context_system::instance();

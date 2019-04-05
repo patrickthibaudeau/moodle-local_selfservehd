@@ -124,5 +124,31 @@ function xmldb_local_selfservehd_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2019040401, 'local', 'selfservehd');
     }
 
+        if ($oldversion < 2019040500) {
+
+        // Define table local_sshd_call_log to be created.
+        $table = new xmldb_table('local_sshd_call_log');
+
+        // Adding fields to table local_sshd_call_log.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('rpiid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+        $table->add_field('agentid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0');
+        $table->add_field('status', XMLDB_TYPE_INTEGER, '1', null, null, null, '0');
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, null, null, '0');
+        $table->add_field('timereplied', XMLDB_TYPE_INTEGER, '20', null, null, null, '0');
+        $table->add_field('timeclosed', XMLDB_TYPE_INTEGER, '20', null, null, null, '0');
+
+        // Adding keys to table local_sshd_call_log.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+        // Conditionally launch create table for local_sshd_call_log.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Selfservehd savepoint reached.
+        upgrade_plugin_savepoint(true, 2019040500, 'local', 'selfservehd');
+    }
+
     return true;
 }

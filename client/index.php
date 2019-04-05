@@ -20,7 +20,7 @@ $IP = $_SERVER['REMOTE_ADDR'];
         <title></title>
     </head>
     <body>
-        <a href="" class="btn btn-primary btn-fullscreen" ><?php echo get_string('request_help', 'local_selfservehd');?></a>
+        <a href="details.php?lang=fr" class="btn btn-primary btn-fullscreen" ><?php echo get_string('request_help', 'local_selfservehd');?></a>
         <script src="js/jquery-3.3.1.min.js" />
         <script src="js/bootstrap.min.js" />
     </body>
