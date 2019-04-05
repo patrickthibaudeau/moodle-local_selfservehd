@@ -1,3 +1,4 @@
+
 ## Raspberry PI configuration
 
 ### Create bash script in /home/pi/Documents
@@ -37,6 +38,53 @@ That will run the script every five minutes. This is used as a status in the Moo
 If you created the file in Windows and then transferred to your Raspberry PI, it will probably not work. Run this command to fix the file
 
     sed -i -e 's/\r$//' sendmac.sh
+
+### Set autostart file
+We need chrome browser to start in kiosk mode and open the proper page
+
+    cd ~/.config/lxsession/LXDE-pi
+    nano autostart
+Add the following code
+
+    @xset s off
+    @xset s noblank
+    @xset -dpms
+    @unclutter -idle 0.5 -root &
+    @sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromium/Default/Preferences
+    @sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
+    @chromium-browser --noerrdialogs --disable-infobars --kiosk --app=https://your_moodle_server/local/selfservehd/client/
+
+### Reboot without requiring password
+The system allows us to reboot through ssh. However, we don't want to use sudo as we can't enter a password. There are various ways of doing this, but we feel that this is the most secure way.
+Thank you to Kevin Friedberg for this solution
+
+    cd /etc/polkit-1/localauthority/50-local.d/
+    sudo nano 10-nopasswd_pi_reboot.pkla
+Copy the following code
+
+    [Let user Pi reboot Pi device]
+    Identity=unix-user:pi
+    Action=org.freedesktop.login1.reboot
+    ResultAny=yes
+
+ For future-proofing once Debian uses the current PolicyKit, this file should keep it working
+ 
+
+    cd /etc/polkit-1
+    mkdir rules.d
+    cd rules.d
+    sudo nano 10-nopasswd_pi_reboot.rules
+Copy the following code
+
+    polkit.addRule(function(action, subject) {
+         if ((action.id == "org.freedesktop.login1.reboot" &&
+             subject.user == "pi")
+         {
+             return polkit.Result.YES;
+         }
+    });
+
+Reboot your pi the regular way.
 
 
 > Written with [StackEdit](https://stackedit.io/).

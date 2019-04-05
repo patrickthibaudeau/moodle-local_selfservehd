@@ -1,3 +1,4 @@
+
 # Self Serve Helpdesk
 The system will be used a York University Glendon Campus. There are two modules to the system.
 
@@ -60,8 +61,10 @@ The plugin should now be installed. But you're not done yet.
  7. Enter a Custom full name: Self Serve Help Desk
  8. Click on the checkbox for System for the "Context types where this role may be assigned"
  9. Scroll down to the filter field and enter selfeserve.
- 10. Click the Allow checkbox for Raspberry PI access
- 11. Click the "Create this role" button
+ 10. Click the "Allow" checkbox for Raspberry PI access
+ 11. In the filter field, type rest protocol
+ 12. Click the "Allow" checkbox for "Use REST protocol 
+ 13. Click the "Create this role" button
 
 #####  Add newly created user to new role
 
@@ -122,3 +125,4 @@ Example
 
     https://localhost/moodle/webservice/rest/server.php?wstoken=d766a1dbaea861cf7934088dfea065b6&wsfunction=sshd_get_raspberry_pi&mac=00:BB:00:00:00&ip=192.168.5.5
 
+> Written with [StackEdit](https://stackedit.io/).
