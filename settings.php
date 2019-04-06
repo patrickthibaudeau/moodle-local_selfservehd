@@ -20,5 +20,12 @@ if ($hassiteconfig) {
     $help = get_string('password_help', 'local_selfservehd');
     $params = '';    
     $settings->add(new admin_setting_configpasswordunmask($name, $text, $help, '', PARAM_TEXT));
+    
+//Token
+    $name = 'selfservehd_pi_token';
+    $text = get_string('token', 'local_selfservehd');
+    $help = get_string('token_help', 'local_selfservehd');
+    $params = '';    
+    $settings->add(new admin_setting_configtext($name, $text, $help, '', PARAM_TEXT));
 
 }

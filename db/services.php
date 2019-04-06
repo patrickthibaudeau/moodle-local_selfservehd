@@ -30,4 +30,28 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'local/selfservehd:rpi'
     ),
+    'sshd_get_help_call' => array(
+        'classname' => 'local_selfservehd_external',
+        'methodname' => 'get_help_call',
+        'classpath' => 'local/selfservehd/externallib.php',
+        'description' => 'Call help',
+        'type' => 'read',
+        'capabilities' => 'local/selfservehd:rpi'
+    ),
+    'sshd_call_answered' => array(
+        'classname' => 'local_selfservehd_external',
+        'methodname' => 'call_answered',
+        'classpath' => 'local/selfservehd/externallib.php',
+        'description' => 'Agent pressed the button to answer the call',
+        'type' => 'read',
+        'capabilities' => 'local/selfservehd:rpi'
+    ),
+    'sshd_update_status' => array(
+        'classname' => 'local_selfservehd_external',
+        'methodname' => 'update_status',
+        'classpath' => 'local/selfservehd/externallib.php',
+        'description' => 'Agent pressed the button at the raspberry pi',
+        'type' => 'read',
+        'capabilities' => 'local/selfservehd:rpi'
+    ),
 );

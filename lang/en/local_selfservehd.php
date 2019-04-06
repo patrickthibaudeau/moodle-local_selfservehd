@@ -68,6 +68,8 @@ $string['room_not_set'] = 'Room not set';
 $string['save'] = 'Save';
 $string['status'] = 'Status';
 $string['selfservehd:rpi'] = 'Raspberry PI access';
+$string['token'] = 'Token';
+$string['token_help'] = 'Enter the token for the web service created in this instance of Moodle';
 $string['username'] = 'Username';
 $string['username_help'] = 'Raspberry Pi username. Please use the same name/password combination for all your Raspberry Pi\'s';
 
