@@ -1,5 +1,4 @@
 <?php
-
 /**
  * *************************************************************************
  * *                        Self Serve Help Desk                          **
@@ -59,7 +58,6 @@ function display_page() {
 //    fwrite($shell, 'cd /homw/pi/Documents' . PHP_EOL);
 //    fwrite($shell, './reboot.sh' . PHP_EOL);
 //    fwrite($shell, 'glendonglendon' . PHP_EOL);
-
     //**********************
     //*** DISPLAY FOOTER ***
     //**********************
@@ -68,3 +66,4 @@ function display_page() {
 
 display_page();
 ?>
+

@@ -30,7 +30,7 @@ class Base {
      * @param array $context The page context (SYSTEM, COURSE, MODULE etc)
      * @return HTML Contains page information and loads all Javascript and CSS
      */
-    public static function page($url, $pagetitle, $pageheading, $context, $pagelayout = 'admin') {
+    public static function page($url, $pagetitle, $pageheading, $context, $pagelayout = 'standard') {
         global $CFG, $PAGE, $SITE;
 
         $stringman = get_string_manager();
@@ -39,7 +39,7 @@ class Base {
         $PAGE->set_url($url);
         $PAGE->set_title($pagetitle);
         $PAGE->set_heading($pageheading);
-        $PAGE->set_pagelayout('standard');
+        $PAGE->set_pagelayout($pagelayout);
         $PAGE->set_context($context);
         $PAGE->requires->css('/local/selfservehd/js/datatable_1_10_18/DataTables-1.10.18/css/jquery.dataTables.min.css');
         $PAGE->requires->css('/local/selfservehd/js/datatable_1_10_18/Buttons-1.5.2/css/buttons.dataTables.min.css');
