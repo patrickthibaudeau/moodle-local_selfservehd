@@ -55,16 +55,9 @@ Add the following code
     @sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
     @chromium-browser --noerrdialogs --disable-infobars --kiosk --app=https://your_moodle_server/local/selfservehd/client/
 
-### Set password file in order to reboot remotely
-The system allows us to reboot through ssh. The only way I have found to make this work so far is by adding a file in the pi with the password and then using the sudo -S command to call this file.
-From the /home/pi folder create a new file called .reboot
-
-    nano .reboot
-    Enter your password for the pi user and save
-
-### Reboot without requiring password (Doesn't work.)
+### Reboot without requiring password 
 The system allows us to reboot through ssh. 
-Thank you to Kevin Friedberg for this solution. However, I haven't managed to make it work with php ssh2. It does work great when I use putty :)
+Thank you to Kevin Friedberg for this solution.
 
     cd /etc/polkit-1/localauthority/50-local.d/
     sudo nano 10-nopasswd_pi_reboot.pkla
@@ -74,6 +67,7 @@ Copy the following code
     Identity=unix-user:pi
     Action=org.freedesktop.login1.reboot
     ResultAny=yes
+    ResultInactive=yes
 
  For future-proofing once Debian uses the current PolicyKit, this file should keep it working
  
