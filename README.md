@@ -1,6 +1,6 @@
 
 # Self Serve Helpdesk
-The system will be used a York University Glendon Campus. There are two modules to the system.
+The system will be used at York University's Glendon Campus. There are two modules to the system.
 
  1. Classroom support kiosk
  2. Self serve kiosk
