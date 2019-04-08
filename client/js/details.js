@@ -8,7 +8,6 @@ function callHelp() {
             data: '&wsfunction=sshd_get_help_call&ip=' + ip + '&moodlewsrestformat=json',
             dataType: 'json',
             success: function (results) {
-                console.log(results);
                 $('#helpModal').modal({
                     backdrop: 'static',
                     show: true

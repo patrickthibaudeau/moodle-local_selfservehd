@@ -54,6 +54,7 @@ $string['message_en'] = 'Message (English)';
 $string['message_fr'] = 'Message (Français)';
 $string['name'] = 'Nom';
 $string['new_template'] = 'Nouveau modèle';
+$string['no_site_url_defined'] = 'Aucun site défini';
 $string['pluginname'] = 'Centre d\'assistance libre-service';
 $string['reboot'] = 'Redémarrer';
 $string['request_help_fr'] = 'Aide';

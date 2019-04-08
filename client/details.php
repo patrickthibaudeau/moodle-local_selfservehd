@@ -68,6 +68,7 @@ if ($device = $DB->get_record('local_sshd_rpi', ['ip' => $IP])) {
                     </div>
                     <div class="modal-body">
                         An agent is on the way!
+                        <?php echo $CFG->selfservehd_pi_token; ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="updateStatus" 

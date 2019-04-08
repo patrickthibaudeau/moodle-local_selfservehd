@@ -27,5 +27,12 @@ if ($hassiteconfig) {
     $help = get_string('token_help', 'local_selfservehd');
     $params = '';    
     $settings->add(new admin_setting_configtext($name, $text, $help, '', PARAM_TEXT));
+    
+//Agent iframe site
+    $name = 'selfservehd_agent_site';
+    $text = get_string('site_url', 'local_selfservehd');
+    $help = get_string('site_url_help', 'local_selfservehd');
+    $params = '';    
+    $settings->add(new admin_setting_configtext($name, $text, $help, '', PARAM_TEXT));
 
 }

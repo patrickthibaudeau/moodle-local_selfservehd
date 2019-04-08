@@ -32,7 +32,8 @@ class agent implements \renderable, \templatable {
            
         $data = [
             'wwwroot' => $CFG->wwwroot,
-            'user' => convert_to_array($USER)
+            'user' => convert_to_array($USER),
+            'siteurl' => $CFG->selfservehd_agent_site
         ];
 
         return $data;

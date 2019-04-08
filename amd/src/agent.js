@@ -27,7 +27,7 @@ define(['jquery', 'jqueryui'], function ($, jqui) {
                 clearInterval(callInterval);
                 callInterval = setInterval(function () {
                     checkIncomingRequests();
-                }, 10000);
+                }, 5000);
             },
             error: function (e) {
                 console.log(e);
