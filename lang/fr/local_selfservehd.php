@@ -31,6 +31,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['actions'] = 'Actions';
+$string['agent'] = 'Agent(e)';
 $string['associated_faq'] = 'FAQ associer';
 $string['building_abbreviation'] = 'Nom abrégé du bâtiment';
 $string['building_name'] = 'Nom du bâtiment';

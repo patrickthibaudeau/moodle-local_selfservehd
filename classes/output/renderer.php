@@ -36,6 +36,16 @@ class renderer extends \plugin_renderer_base {
         $data = $faqs->export_for_template($this);
         return $this->render_from_template('local_selfservehd/faqs', $data);
     }
+    
+    public function render_agent(\templatable $agent) {
+        $data = $agent->export_for_template($this);
+        return $this->render_from_template('local_selfservehd/agent', $data);
+    }
+    
+    public function render_faq_alerts(\templatable $alerts) {
+        $data = $alerts->export_for_template($this);
+        return $this->render_from_template('local_selfservehd/faq_alerts', $data);
+    }
 
     
 }

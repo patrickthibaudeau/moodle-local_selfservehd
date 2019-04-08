@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <iframe src="https://ithelp.glendon.yorku.ca/scp/" style="width: 100%; height: 940px; border: 0;"></iframe> 
+        </div>
+        <div class="col-2">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h4>{{#str}}in_coming_requests, local_selfservehd{{/str}}</h4>
+                </div>
+                <div class="card-body">
+                    <div id="alertsContainer">
+                        {{> local_selfservehd/faq_alerts}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{{#js}}
+require(['local_selfservehd/agent'], function(mod) {
+mod.init();
+});
+{{/js}}

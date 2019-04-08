@@ -21,5 +21,7 @@ require_once($CFG->dirroot . '/local/selfservehd/classes/Device.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/Devices.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/Faq.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/Faqs.php');
+require_once($CFG->dirroot . '/local/selfservehd/classes/FaqAlert.php');
+require_once($CFG->dirroot . '/local/selfservehd/classes/FaqAlerts.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/RaspberryPi.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/RaspberryPis.php');

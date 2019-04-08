@@ -28,6 +28,8 @@ class Base {
      * @param string $pagetitle  Page title
      * @param string $pageheading Page heading (Note hard coded to site fullname)
      * @param array $context The page context (SYSTEM, COURSE, MODULE etc)
+     * @param string $pagelayout Default standard available layouts: base, course,incourse,frontpage,admin,embedded.
+     * Full list available at https://docs.moodle.org/dev/Page_API#Base_theme_page_layouts
      * @return HTML Contains page information and loads all Javascript and CSS
      */
     public static function page($url, $pagetitle, $pageheading, $context, $pagelayout = 'standard') {
