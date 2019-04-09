@@ -33,6 +33,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['actions'] = 'Actions';
 $string['agent'] = 'Agent';
+$string['agent_has_been_called'] = 'A notification has been sent to the call center. Waiting for an agent to reply.';
+$string['agent_on_the_way'] = 'will be serving you shortly.';
 $string['associated_faq'] = 'Associated FAQ';
 $string['building_abbreviation'] = 'Build short name';
 $string['building_name'] = 'Building name';

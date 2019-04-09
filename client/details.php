@@ -23,14 +23,7 @@ if ($device = $DB->get_record('local_sshd_rpi', ['ip' => $IP])) {
 }
 ?>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" crossorigin="anonymous"/>
-        <link rel="stylesheet" type="text/css" href="css/client.css" crossorigin="anonymous"/>
-        <title></title>
-    </head>
+    <?php include_once('header.php') ?>
     <body>
         <div class="container-fluid">
             <div id="displayContainer">
@@ -50,7 +43,7 @@ if ($device = $DB->get_record('local_sshd_rpi', ['ip' => $IP])) {
                         <a href="javascript:void(0);" class="btn btn-outline-danger btn-lg helpBtn" 
                            data-ip="<?php echo $IP; ?>" 
                            data-token="<?php echo $CFG->selfservehd_pi_token; ?>"
-                           data-wwwroot="<?php echo $CFG->wwwroot ?>"><?php echo get_string('help', 'local_selfservehd'); ?></a>;
+                           data-wwwroot="<?php echo $CFG->wwwroot ?>"><?php echo get_string('help', 'local_selfservehd'); ?></a>
                     </span>
                 </div>
             </nav>
@@ -67,14 +60,18 @@ if ($device = $DB->get_record('local_sshd_rpi', ['ip' => $IP])) {
                                                 </button>-->
                     </div>
                     <div class="modal-body">
-                        An agent is on the way!
-                        <?php echo $CFG->selfservehd_pi_token; ?>
+                        <div class="alert alert-info">
+                            <h4><?php echo get_string('agent_has_been_called', 'local_selfservehd'); ?></h4>
+                        </div>
+                        <div id="agentResponded" class="alert alert-success mt-3">
+                            <h4><span id="agentName"></span> <?php echo get_string('agent_on_the_way', 'local_selfservehd'); ?></h4>
+                        </div>                        
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="updateStatus" 
+                        <button type="button" id="updateStatus" class="btn btn-danger" 
                                 data-ip="<?php echo $IP; ?>" 
                                 data-token="<?php echo $CFG->selfservehd_pi_token; ?>"
-                                data-wwwroot="<?php echo $CFG->wwwroot ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                data-wwwroot="<?php echo $CFG->wwwroot ?>"><?php echo get_string('close', 'local_selfservehd'); ?></button>
                     </div>
                 </div>
             </div>

@@ -6,10 +6,8 @@ class local_selfservehd_external extends external_api {
 
     public static function get_raspberry_pi_details() {
         $fields = array(
-            'mac' => new external_value(PARAM_TEXT,
-                    'MAC address of raspberry pi'),
-            'ip' => new external_value(PARAM_TEXT,
-                    'IP address of raspberry pi'),
+            'id' => new external_value(PARAM_TEXT,
+                    'Id of record'),
         );
         return new external_single_structure($fields);
     }
@@ -67,11 +65,11 @@ class local_selfservehd_external extends external_api {
             $data['ip'] = $ip;
             $data['lastping'] = time();
             $DB->update_record('local_sshd_rpi', $data);
+            $newMac = $macExist->id;
         }
 
         $return = [];
-        $return[]['mac'] = $mac;
-        $return[]['ip'] = $ip;
+        $return[]['id'] = $newMac;
         //Look for existing mac in table
         return $return;
     }
@@ -139,9 +137,8 @@ class local_selfservehd_external extends external_api {
             $data['timecreated'] = time();
             $newCall = $DB->insert_record('local_sshd_call_log', $data);
         } else {
-            $newCall = 0;
+            $newCall = $inProgress->id;
         }
-
 
         $return = [];
         $return[]['id'] = $newCall;
@@ -277,10 +274,14 @@ class local_selfservehd_external extends external_api {
         $rpi = $DB->get_record('local_sshd_rpi', ['ip' => $ip]);
         if ($inProgress = $DB->get_record('local_sshd_call_log', ['rpiid' => $rpi->id, 'status' => 0])) {
             $data = [];
-            $data['id'] = $inProgress->id;
-            $data['timeclosed'] = time();
-            $data['status'] = true;
-            $DB->update_record('local_sshd_call_log', $data);
+            if ($inProgress->timereplied) {
+                $data['id'] = $inProgress->id;
+                $data['timeclosed'] = time();
+                $data['status'] = true;
+                $DB->update_record('local_sshd_call_log', $data);
+            } else {
+                $data['timeclosed'] = 0;
+            }
         }
 
 
@@ -296,6 +297,79 @@ class local_selfservehd_external extends external_api {
      */
     public static function update_status_returns() {
         return new external_multiple_structure(self::update_status_details());
+    }
+
+    /**
+     * Check status
+     */
+    public static function check_status_details() {
+        $fields = array(
+            'agent' => new external_value(PARAM_TEXT,
+                    'Name of agent'),
+        );
+        return new external_single_structure($fields);
+    }
+
+    /**
+     * Returns description of method parameters
+     * @return external_function_parameters
+     */
+    public static function check_status_parameters() {
+        return new external_function_parameters(
+                array(
+            'ip' => new external_value(PARAM_TEXT,
+                    'The IP address from the Raspberry PI'),
+                )
+        );
+    }
+
+    /**
+     * Returns welcome message
+     * @return string welcome message
+     */
+    public static function check_status($ip) {
+        global $USER, $DB;
+        //Parameter validation
+        //REQUIRED
+        $params = self::validate_parameters(self::check_status_parameters(),
+                        array('ip' => $ip)
+        );
+
+        //Context validation
+        //OPTIONAL but in most web service it should present
+        $context = context_system::instance();
+        self::validate_context($context);
+
+        //Capability checking
+        //OPTIONAL but in most web service it should present
+        if (!has_capability('local/selfservehd:rpi', $context)) {
+            throw new moodle_exception('cannotaccesssystem', 'local_selfservehd');
+        }
+
+        $rpi = $DB->get_record('local_sshd_rpi', ['ip' => $ip]);
+        if ($inProgress = $DB->get_record('local_sshd_call_log', ['rpiid' => $rpi->id, 'status' => 0])) {
+            if ($inProgress->timereplied) {
+                //Get agent name
+                $user = $DB->get_record('user', ['id' => $inProgress->agentid]);
+                $agent = fullname($user);
+            } else {
+                $agent = 'false';
+            }
+        }
+
+
+        $return = [];
+        $return[]['agent'] = $agent;
+        //Look for existing mac in table
+        return $return;
+    }
+
+    /**
+     * Returns description of method result value
+     * @return external_description
+     */
+    public static function check_status_returns() {
+        return new external_multiple_structure(self::check_status_details());
     }
 
 }

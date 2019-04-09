@@ -54,4 +54,12 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'local/selfservehd:rpi'
     ),
+    'sshd_check_status' => array(
+        'classname' => 'local_selfservehd_external',
+        'methodname' => 'check_status',
+        'classpath' => 'local/selfservehd/externallib.php',
+        'description' => 'Verifies if agent has replied to the call',
+        'type' => 'read',
+        'capabilities' => 'local/selfservehd:rpi'
+    ),
 );

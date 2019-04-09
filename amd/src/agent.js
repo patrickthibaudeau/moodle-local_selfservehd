@@ -13,7 +13,7 @@ define(['jquery', 'jqueryui'], function ($, jqui) {
     }
 
     /**
-     * Update alertsContainer every 10 seconds
+     * Update alertsContainer every 2 seconds
      * @returns {undefined}
      */
     function checkIncomingRequests() {
@@ -27,7 +27,7 @@ define(['jquery', 'jqueryui'], function ($, jqui) {
                 clearInterval(callInterval);
                 callInterval = setInterval(function () {
                     checkIncomingRequests();
-                }, 5000);
+                }, 2000);
             },
             error: function (e) {
                 console.log(e);
