@@ -23,7 +23,7 @@ I'm sure this can be done for IOS devices too, however, because this is to be us
  Download the repository and unzip in the *moodle_root*/local/ folder. Rename the folder to selfservehd.
  Login to your Moodle instance as an adminsitrator. The plugin installation should start. Press the install button.
 
-The plugin should now be installed. But you're not done yet.
+Once the plugin is installed, it will ask you to fill in some parameters. Skip this step for now by pressing the save button. We'll set these parameters later once we have other settings created..
 
  #### Setting up the Web service
 ##### Enable web services
@@ -125,4 +125,33 @@ Example
 
     https://localhost/moodle/webservice/rest/server.php?wstoken=d766a1dbaea861cf7934088dfea065b6&wsfunction=sshd_get_raspberry_pi&mac=00:BB:00:00:00&ip=192.168.5.5
 
-> Written with [StackEdit](https://stackedit.io/).
+## Set plugin parameters
+Remember those setting parameters we skipped during the install process? Well, here they are. 
+The plugin communicates with the Raspberry Pi's through two methods.
+
+ 1. SSH
+ 2. Web services
+
+### SSH
+To setup ssh for php, you must install php_ssh2 on your server.
+
+    sudo apt install php_ssh2
+    service apache2 restart
+Two settings are required. You probably already guessed it.
+
+ 1. Username
+ 2. Password
+### Web services
+The token you created in the earlier steps will be required
+### Agent Site URL
+"Wait a second, you said two methods earlier on!" I did, but the third parameter has nothing to do with the Raspberry Pi. the agent site URL is the URL to your ticketing system. The agent page uses an iframe to display the ticketing system page on the left. The right side of the agent page displays incoming help requests form the classroom support Raspberry Pi's.
+
+To get to the settings do the following
+ 3. Click on "Site administration"
+ 4. Click on plugins and scroll down to "Local plugins"
+ 5. Click on "Self Serve Help Desk"
+ 6. Modify the values accordingly and save the changes.
+
+> Note: The iframe may not work if Access-Control-Allow-Origin on the ticketing system server is not set to allow your site.
+ 
+Written with [StackEdit](https://stackedit.io/).
