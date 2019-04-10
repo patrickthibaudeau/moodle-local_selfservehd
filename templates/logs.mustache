@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        {{#str}}room, local_selfservehd{{/str}}
+                    </th>
+                    <th>
+                        {{#str}}timecreated, local_selfservehd{{/str}}
+                    </th>
+                    <th>
+                        {{#str}}agent, local_selfservehd{{/str}}
+                    </th>
+                    <th>
+                        {{#str}}timereplied, local_selfservehd{{/str}}
+                    </th>
+                    <th>
+                        {{#str}}timeclosed, local_selfservehd{{/str}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#stats}}
+                <tr>
+                    <td>
+                        {{room}}
+                    </td>
+                    <td>
+                        {{timecreated}}
+                    </td>
+                    <td>
+                        {{agent}}
+                    </td>
+                    <td>
+                        {{timereplied}}
+                    </td>
+                    <td>
+                        {{timeclosed}}
+                    </td>
+                </tr>
+                {{/stats}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

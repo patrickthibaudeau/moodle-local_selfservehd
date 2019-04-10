@@ -136,7 +136,7 @@ class FaqAlert extends Device {
 
         $this->timeClosed= $results->timeclosed ?? 0;
         if (isset($results->timeclosed)) {
-            $this->timeClosedHr = date('F d, Y HS:i', $results->timeclosed);
+            $this->timeClosedHr = date('F d, Y H:i', $results->timeclosed);
         } else {
             $this->timeClosedHr = '';
         }
