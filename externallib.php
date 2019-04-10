@@ -111,7 +111,7 @@ class local_selfservehd_external extends external_api {
      * @return string welcome message
      */
     public static function get_help_call($ip) {
-        global $USER, $DB;
+        global $CFG, $USER, $DB;
         //Parameter validation
         //REQUIRED
         $params = self::validate_parameters(self::get_help_call_parameters(),
@@ -136,6 +136,25 @@ class local_selfservehd_external extends external_api {
             $data['rpiid'] = $rpi->id;
             $data['timecreated'] = time();
             $newCall = $DB->insert_record('local_sshd_call_log', $data);
+
+            //Send email to ticketing system.
+            if ($CFG->selfservehd_email_send) {
+                //Create user object
+                $emailto = new \stdClass();
+                $emailto->id = rand(2000000, 999999);
+                $emailto->email = $CFG->selfservehd_email_send;
+                $emailto->deleted = 0;
+                $emailto->auth = 'manual';
+                $emailto->mailformat = 1;
+                $emailto->firstname = "Classroom";
+                $emailto->lastname = "Support";
+
+                $subject = 'Room ' . trim($rpi->building_shortname) . ' ' . trim($rpi->room_number) . ' requires attention (log id: ' . $newCall . ')';
+                $message = 'A call from ' . trim($rpi->building_shortname) . ' ' . trim($rpi->room_number)
+                        . ' was initiated at ' . date('H:i', $data['timecreated']) . ' on ' . date('F d, Y ', $data['timecreated']);;
+
+                email_to_user($emailto, $CFG->noreplyaddress, $subject, $message);
+            }
         } else {
             $newCall = $inProgress->id;
         }

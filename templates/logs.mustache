@@ -4,6 +4,9 @@
             <thead>
                 <tr>
                     <th>
+                        {{#str}}id, local_selfservehd{{/str}}
+                    </th>
+                    <th>
                         {{#str}}room, local_selfservehd{{/str}}
                     </th>
                     <th>
@@ -23,6 +26,9 @@
             <tbody>
                 {{#stats}}
                 <tr>
+                    <td>
+                        {{id}}
+                    </td>
                     <td>
                         {{room}}
                     </td>
