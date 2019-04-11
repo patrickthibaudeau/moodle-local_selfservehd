@@ -44,5 +44,16 @@ if ($hassiteconfig) {
     $text = get_string('ticket_system_email', 'local_selfservehd');
     $help = get_string('ticket_system_email_help', 'local_selfservehd');
     $params = '';    
-    $settings->add(new admin_setting_configtext($name, $text, $help, '', PARAM_TEXT));    
+    $settings->add(new admin_setting_configtext($name, $text, $help, '', PARAM_TEXT)); 
+    
+//Heading
+    $name = get_string('service_hours', 'local_selfservehd');
+    $settings->add(new admin_setting_heading('selfservehd_service_hours', $name, ''));
+
+//Agent iframe site
+    $name = 'selfservehd_start_time';
+    $text = get_string('start_time', 'local_selfservehd');
+    $help = get_string('start_time_help', 'local_selfservehd');
+    $params = '';
+    $settings->add(new admin_setting_configtextarea($name, $text, $help, '', PARAM_RAW));  
 }
