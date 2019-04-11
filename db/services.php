@@ -62,4 +62,12 @@ $functions = array(
         'type' => 'read',
         'capabilities' => 'local/selfservehd:rpi'
     ),
+    'sshd_service_open' => array(
+        'classname' => 'local_selfservehd_external',
+        'methodname' => 'service_open',
+        'classpath' => 'local/selfservehd/externallib.php',
+        'description' => 'Verifies call centre is open',
+        'type' => 'read',
+        'capabilities' => 'local/selfservehd:rpi'
+    ),
 );

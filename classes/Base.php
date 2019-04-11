@@ -83,7 +83,6 @@ class Base {
             'changeformat' => 1, 'context' => $context, 'noclean' => 1, 'trusttext' => 0);
     }
 
-
     /**
      * Returns a single user record based on
      * 1. user id
@@ -114,4 +113,72 @@ class Base {
             return $DB->get_record('user', array('idnumber' => $idNumber));
         }
     }
+
+    /**
+     * Verifies if the services are available or not
+     * @global \stdClass $CFG
+     * @return boolean
+     */
+    public static function getServiceHours() {
+        global $CFG;
+        $serviceHours = $CFG->selfservehd_start_time;
+        $serviceHoursArray = explode("\n", $serviceHours);
+        //Days of the week numeric value (array key)
+        $days = ['U', 'M', 'T', 'W', 'R', 'F', 'S'];
+       
+        for ($i = 0; $i < count($serviceHoursArray); $i++) {
+            //create array for days and hours
+            $split = explode('=', $serviceHoursArray[$i]);
+            //Split days based on delimiter
+            if (strstr($split[0], '-')) {
+                $daySplit = explode('-', $split[0]);
+                //Get days
+                $firstDay = array_search($daySplit[0], $days);
+                $lastDay = array_search($daySplit[1], $days);
+                //Create dayRange array
+                $dayRange = [];
+                for ($x = $firstDay; $x <= $lastDay; $x++) {
+                    $dayRange[] = $days[$x];
+                }
+            } elseif (strstr($split[0], ',')) {
+                $dayRange = explode(',', $split[0]);
+            } else {
+                $dayRange = [$split[0]];
+            }
+            //Get todays day
+            $today = $days[date('w', time())];
+
+            //Get times
+            if (strstr($split[1], ',')) {
+                $timeSplit = explode(',', $split[1]);
+                $availableTimes = [];
+                for ($z = 0; $z < count($timeSplit); $z++) {
+                    //seperate the start and end time
+                    $startFinishTimes = explode('-', $timeSplit[$i]);
+                    $availableTimes[$z]['start'] = strtotime(date('m/d/Y',time()) . " $startFinishTimes[0]:00");
+                    $availableTimes[$z]['finish'] = strtotime(date('m/d/Y',time()) . " $startFinishTimes[1]:00");
+                }
+            } else {
+                //seperate the start and end time
+                $startFinishTimes = explode('-',$split[1]);
+                $availableTimes = [];
+                $availableTimes[0]['start'] = strtotime(date('m/d/Y',time()) . " $startFinishTimes[0]:00");
+                $availableTimes[0]['finish'] = strtotime(date('m/d/Y',time()) . " $startFinishTimes[1]:00");
+            }
+            //By default services are closed
+            $open = false;
+            //Find out if service desk is open
+            if (in_array($today, $dayRange)) {
+                foreach ($availableTimes as $key => $time) {
+                    if ($time['start'] <= time() && $time['finish'] >= time()) {
+                        $open = true;
+                        break;
+                    }
+                }
+            }
+            
+            return $open;
+        }
+    }
+
 }

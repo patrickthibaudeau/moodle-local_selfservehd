@@ -1,5 +1,5 @@
 <?php
-
+require_once('config.php');
 require_once($CFG->libdir . "/externallib.php");
 
 class local_selfservehd_external extends external_api {
@@ -391,4 +391,64 @@ class local_selfservehd_external extends external_api {
         return new external_multiple_structure(self::check_status_details());
     }
 
+    /**
+     * Service desk is open
+     */
+    public static function service_open_details() {
+        $fields = array(
+            'open' => new external_value(PARAM_TEXT,
+                    'Boolean true if hours are open'),
+        );
+        return new external_single_structure($fields);
+    }
+
+    /**
+     * Returns description of method parameters
+     * @return external_function_parameters
+     */
+    public static function service_open_parameters() {
+        return new external_function_parameters(
+                array(
+            'ip' => new external_value(PARAM_TEXT,
+                    'The IP address from the Raspberry PI'),
+                )
+        );
+    }
+
+    /**
+     * Returns welcome message
+     * @return string welcome message
+     */
+    public static function service_open($ip) {
+        global $USER, $DB;
+        //Parameter validation
+        //REQUIRED
+        $params = self::validate_parameters(self::service_open_parameters(),
+                        array('ip' => $ip)
+        );
+
+        //Context validation
+        //OPTIONAL but in most web service it should present
+        $context = context_system::instance();
+        self::validate_context($context);
+
+        //Capability checking
+        //OPTIONAL but in most web service it should present
+        if (!has_capability('local/selfservehd:rpi', $context)) {
+            throw new moodle_exception('cannotaccesssystem', 'local_selfservehd');
+        }
+
+        $return = [];
+        $return[]['open'] = \local_selfservehd\Base::getServiceHours();
+        //Look for existing mac in table
+        return $return;
+    }
+
+    /**
+     * Returns description of method result value
+     * @return external_description
+     */
+    public static function service_open_returns() {
+        return new external_multiple_structure(self::service_open_details());
+    }
 }

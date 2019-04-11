@@ -25,6 +25,9 @@ if ($device = $DB->get_record('local_sshd_rpi', ['ip' => $IP])) {
 <html>
     <?php include_once('header.php') ?>
     <body>
+        <input type="hidden" id="wwwroot" value="<?php echo $CFG->wwwroot ?>">
+        <input type="hidden" id="token" value="<?php echo $CFG->selfservehd_pi_token; ?>">
+        <input type="hidden" id="ip" value="<?php echo $IP ?>">
         <div class="container-fluid">
             <div id="displayContainer">
                 <div class="card mt-2 mb-5">

@@ -1,6 +1,11 @@
 var callInterval;
+var wwwroot = $('#wwwroot').val();
+var token = $('#token').val();
+var ip = $('#ip').val();
 
 function callHelp() {
+    //Check to see if service hours are open
+    isServiceOpen();
 
     $('.helpBtn').click(function () {
         $('.helpBtn').unbind();
@@ -48,7 +53,7 @@ function callHelp() {
 }
 
 function checkStatus(wwwroot, token, ip) {
-        $.ajax({
+    $.ajax({
         url: wwwroot + '/webservice/rest/server.php?wstoken=' + token,
         data: '&wsfunction=sshd_check_status&ip=' + ip + '&moodlewsrestformat=json',
         dataType: 'json',
@@ -65,6 +70,26 @@ function checkStatus(wwwroot, token, ip) {
                 $('#updateStatus').show();
                 $('#agentResponded').show();
                 clearInterval(callInterval);
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+
+function isServiceOpen() {
+    console.log(wwwroot + '/webservice/rest/server.php?wstoken=' + token + '&wsfunction=sshd_service_open&ip=' + ip + '&moodlewsrestformat=json');
+    $.ajax({
+        url: wwwroot + '/webservice/rest/server.php?wstoken=' + token,
+        data: '&wsfunction=sshd_service_open&ip=' + ip + '&moodlewsrestformat=json',
+        dataType: 'json',
+        success: function (results) {
+            console.log(results[0].open)
+            if (results[0].open == "1") {
+                $('.helpBtn').show();
+            } else {
+                $('.helpBtn').hide();
             }
         },
         error: function (e) {

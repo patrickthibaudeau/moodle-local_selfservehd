@@ -30,8 +30,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2019041003;
+$plugin->version = 2019041100;
 $plugin->component = 'local_selfservehd';
-$plugin->release = '0.0.0';
+$plugin->release = '0.1.0';
 $plugin->requires = 2018051700;
-$plugin->maturity = MATURITY_ALPHA;
+$plugin->maturity = MATURITY_BETA;
