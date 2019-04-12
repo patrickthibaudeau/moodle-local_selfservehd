@@ -50,10 +50,10 @@ if ($hassiteconfig) {
     $name = get_string('service_hours', 'local_selfservehd');
     $settings->add(new admin_setting_heading('selfservehd_service_hours', $name, ''));
 
-//Agent iframe site
-    $name = 'selfservehd_start_time';
-    $text = get_string('start_time', 'local_selfservehd');
-    $help = get_string('start_time_help', 'local_selfservehd');
+//Agent Service hours
+    $name = 'selfservehd_service_hours';
+    $text = get_string('service_hours', 'local_selfservehd');
+    $help = get_string('service_hours_help', 'local_selfservehd');
     $params = '';
     $settings->add(new admin_setting_configtextarea($name, $text, $help, '', PARAM_RAW));  
 }

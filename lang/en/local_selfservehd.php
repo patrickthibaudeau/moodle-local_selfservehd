@@ -86,8 +86,24 @@ $string['site_url_help'] = 'AThis site is used on the agent page. Usually, this 
 $string['statistics'] = 'Statistics';
 $string['status'] = 'Status';
 $string['selfservehd:rpi'] = 'Raspberry PI access';
-$string['start_time'] = 'Start time';
-$string['start_time_help'] = 'WRITE ACTUAL INSTRUCTIONS';
+$string['service_hours'] = 'Start time';
+$string['service_hours_help'] = 'You can add the hours your service is available here. When your services are not available, the "help button'
+        . ' On the Raspberry Pi will not be available either. To write your hours, you must follow the naming convention:<br>'
+        . 'Days are identified as letters: U=Sunday, M=Monday, T=Tuesday,W=Wednesday,R=Thursday,F=Friday,S=Saturday<br><br>'
+        . 'Example 1. Open Monday to Friday from 8:30 AM to 12:30 PM, 1:30 PM to 5:30 PM and 6:00PM to 9:00 PM and again on Saturday from 9:00 AM to 3:00 PM<br>'
+        . '<br><code>'
+        . 'M-F=8:30-12:30,13:30-17:30,18:00-21:00<br>'
+        . 'S=9:00-15:00'
+        . '</code><br><br>'
+        . 'Note that must write the time using the 24 hour format. Also, add a new line for each new day<br><br>'
+        . 'Example 2. Open Monday, Wednesday and Friday from 8:30 AM to 4:30 PM. Open Tuesday and Thursday from 10:00 AM to 9:00 PM'
+        . ' and Saturday from 9:00 AM to 3:00 PM<br>'
+        . '<br><code>'
+        . 'M,W,F=8:30-16:30<br>'
+        . 'T,R,F=10:00-21:00<br>'
+        . 'S=9:00-15:00'
+        . '</code><br><br>'
+        . 'Note the commas seperating the days.';
 $string['ticket_system_email'] = 'Ticketing system email';
 $string['ticket_system_email_help'] = 'Enter the email used by your ticketing system to recieve/open tickets.';
 $string['ticketing_system'] = 'Ticketing system';

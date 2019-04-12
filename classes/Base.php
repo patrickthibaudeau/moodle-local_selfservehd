@@ -121,7 +121,7 @@ class Base {
      */
     public static function getServiceHours() {
         global $CFG;
-        $serviceHours = $CFG->selfservehd_start_time;
+        $serviceHours = $CFG->selfservehd_service_hours;
         $serviceHoursArray = explode("\n", $serviceHours);
         //Days of the week numeric value (array key)
         $days = ['U', 'M', 'T', 'W', 'R', 'F', 'S'];
@@ -154,9 +154,9 @@ class Base {
                 $availableTimes = [];
                 for ($z = 0; $z < count($timeSplit); $z++) {
                     //seperate the start and end time
-                    $startFinishTimes = explode('-', $timeSplit[$i]);
-                    $availableTimes[$z]['start'] = strtotime(date('m/d/Y',time()) . " $startFinishTimes[0]:00");
-                    $availableTimes[$z]['finish'] = strtotime(date('m/d/Y',time()) . " $startFinishTimes[1]:00");
+                    $startFinishTimes = explode('-', $timeSplit[$z]);                   
+                    $availableTimes[$z]['start'] = strtotime(date('m/d/Y',time()) . trim($startFinishTimes[0]) . ":00");
+                    $availableTimes[$z]['finish'] = strtotime(date('m/d/Y',time()) . trim($startFinishTimes[1]) . ":00");
                 }
             } else {
                 //seperate the start and end time
@@ -170,7 +170,7 @@ class Base {
             //Find out if service desk is open
             if (in_array($today, $dayRange)) {
                 foreach ($availableTimes as $key => $time) {
-                    if ($time['start'] <= time() && $time['finish'] >= time()) {
+                    if ($time['start'] <= time() &&  time() <= $time['finish']) {
                         $open = true;
                         break;
                     }
