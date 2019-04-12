@@ -419,8 +419,7 @@ class local_selfservehd_external extends external_api {
                 $agent = 'false';
             }
         }
-
-
+        
         $return = [];
         $return[]['agent'] = $agent;
         //Look for existing mac in table
