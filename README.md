@@ -1,4 +1,5 @@
 
+
 # Self Serve Helpdesk
 The system will be used at York University's Glendon Campus. There are two modules to the system.
 
@@ -87,7 +88,7 @@ Once the plugin is installed, it will ask you to fill in some parameters. Skip t
  9. Click the "Add service" button.
  10. In the new page, click "Add functions"
  11. In the search field type sshd_
- 12. Click on sshd_get_raspberry_pi:Set MAC Address
+ 12. Add all sshd_ functions that pop up
  13. Click the "Add functions" button
 
 ##### Add authorized user to external service
@@ -95,7 +96,7 @@ Once the plugin is installed, it will ask you to fill in some parameters. Skip t
  2. Click on the "Plugins" tab
  3. Scroll down to Web services ( at the bottom)
  4. Click External services. 
- 5. Click Authorized users for the External service you just created (Should be called Slef Serve Help Desk)
+ 5. Click Authorized users for the External service you just created (Should be called Self Serve Help Desk)
  6. Select the user you created previously from the Not authorised users box
  7. Click "Add"
 
