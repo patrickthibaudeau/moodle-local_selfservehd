@@ -104,6 +104,7 @@ $string['service_hours_help'] = 'You can add the hours your service is available
         . 'S=9:00-15:00'
         . '</code><br><br>'
         . 'Note the commas seperating the days.';
+$string['services_closed'] = 'No service currently available';
 $string['ticket_system_email'] = 'Ticketing system email';
 $string['ticket_system_email_help'] = 'Enter the email used by your ticketing system to recieve/open tickets.';
 $string['ticketing_system'] = 'Ticketing system';

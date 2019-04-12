@@ -88,8 +88,12 @@ function isServiceOpen() {
             console.log(results[0].open)
             if (results[0].open == "1") {
                 $('.helpBtn').show();
+                $('#itWorksBtn').show();
+                $('#serviceClosed').hide();
             } else {
                 $('.helpBtn').hide();
+                $('#itWorksBtn').hide();
+                $('#serviceClosed').show();
             }
         },
         error: function (e) {

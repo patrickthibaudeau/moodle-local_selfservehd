@@ -41,12 +41,12 @@ if ($device = $DB->get_record('local_sshd_rpi', ['ip' => $IP])) {
                 <div class="navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                     </ul>
+                    <a href="index.php" class="btn btn-outline-danger btn-lg mr-3" id="serviceClosed">
+                        <?php echo get_string('services_closed', 'local_selfservehd');?>
+                    </a>
                     <span class="float-right">
-                        <a href="index.php" class="btn btn-outline-success btn-lg mr-2"><?php echo get_string('it_works', 'local_selfservehd'); ?></a>
-                        <a href="javascript:void(0);" class="btn btn-outline-danger btn-lg helpBtn" 
-                           data-ip="<?php echo $IP; ?>" 
-                           data-token="<?php echo $CFG->selfservehd_pi_token; ?>"
-                           data-wwwroot="<?php echo $CFG->wwwroot ?>"><?php echo get_string('help', 'local_selfservehd'); ?></a>
+                        <a href="index.php" id="itWorksBtn" class="btn btn-outline-success btn-lg mr-2"><?php echo get_string('it_works', 'local_selfservehd'); ?></a>
+                        <a href="javascript:void(0);" class="btn btn-outline-danger btn-lg helpBtn"><?php echo get_string('help', 'local_selfservehd'); ?></a>
                     </span>
                 </div>
             </nav>
