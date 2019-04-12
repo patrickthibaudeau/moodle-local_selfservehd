@@ -1,6 +1,29 @@
 <?php
+
 require_once('config.php');
 require_once($CFG->libdir . "/externallib.php");
+
+/**
+ * Classes used for sending SMS
+ */
+class SMSBulkParam {
+    public $AccountKey;
+    public $MessageBody;
+    public $Reference;
+    public $CellNumbers;
+
+}
+
+class SMSSingleParam {
+    public $AccountKey;
+    public $MessageBody;
+    public $Reference;
+    public $CellNumber;
+
+}
+/**
+ * Classes used for sending SMS
+ */
 
 class local_selfservehd_external extends external_api {
 
@@ -137,6 +160,10 @@ class local_selfservehd_external extends external_api {
             $data['timecreated'] = time();
             $newCall = $DB->insert_record('local_sshd_call_log', $data);
 
+            $subject = 'Room ' . trim($rpi->building_shortname) . ' ' . trim($rpi->room_number) . ' requires attention (log id: ' . $newCall . ')';
+            $message = 'A call from ' . trim($rpi->building_shortname) . ' ' . trim($rpi->room_number)
+                    . ' was initiated at ' . date('H:i', $data['timecreated']) . ' on ' . date('F d, Y ', $data['timecreated']);
+
             //Send email to ticketing system.
             if ($CFG->selfservehd_email_send) {
                 //Create user object
@@ -149,11 +176,28 @@ class local_selfservehd_external extends external_api {
                 $emailto->firstname = "Classroom";
                 $emailto->lastname = "Support";
 
-                $subject = 'Room ' . trim($rpi->building_shortname) . ' ' . trim($rpi->room_number) . ' requires attention (log id: ' . $newCall . ')';
-                $message = 'A call from ' . trim($rpi->building_shortname) . ' ' . trim($rpi->room_number)
-                        . ' was initiated at ' . date('H:i', $data['timecreated']) . ' on ' . date('F d, Y ', $data['timecreated']);;
-
                 email_to_user($emailto, $CFG->noreplyaddress, $subject, $message);
+            }
+
+            //Send SMS message
+            if (($CFG->selfservehd_sms_apikey == true) && ($CFG->selfservehd_sms_agent_numbers == true)) {
+                $client = new SoapClient('http://www.smsgateway.ca/sendsms.asmx?WSDL');
+                $cellNumbers = explode(',', $CFG->selfservehd_sms_agent_numbers);
+                if (count($cellNumbers) > 1) {
+                    $parameters = new SMSBulkParam();
+                    $parameters->AccountKey = trim($CFG->selfservehd_sms_apikey);
+                    $parameters->MessageBody = "$message";
+                    $parameters->Reference = "$newCall";
+                    $parameters->CellNumbers = $cellNumbers;
+                    $Result = $client->SendBulkMessage($parameters);
+                } else {
+                    $parameters = new SMSSingleParam();
+                    $parameters->AccountKey = trim($CFG->selfservehd_sms_apikey);
+                    $parameters->MessageBody = "$message";
+                    $parameters->Reference = "$newCall";
+                    $parameters->CellNumber = trim($CFG->selfservehd_sms_agent_numbers);
+                    $Result = $client->SendMessage($parameters);
+                }
             }
         } else {
             $newCall = $inProgress->id;
@@ -451,4 +495,5 @@ class local_selfservehd_external extends external_api {
     public static function service_open_returns() {
         return new external_multiple_structure(self::service_open_details());
     }
+
 }

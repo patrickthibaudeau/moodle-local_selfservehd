@@ -1,4 +1,5 @@
 <?php
+
 /**
  * *************************************************************************
  * *                        Self Serve Help Desk                          **
@@ -39,8 +40,23 @@ function display_page() {
     echo \local_selfservehd\Base::page($CFG->wwwroot . '/local/selfservehd/test.php',
             $pagetitle, $pageheading, $context);
 
+    class SMSBulkParam {
 
+        public $AccountKey;
+        public $MessageBody;
+        public $Reference;
+        public $CellNumbers;
 
+    }
+
+    class SMSSingleParam {
+
+        public $AccountKey;
+        public $MessageBody;
+        public $Reference;
+        public $CellNumber;
+
+    }
 
     $HTMLcontent = '';
     //**********************
@@ -50,7 +66,27 @@ function display_page() {
     //**********************
     //*** DISPLAY CONTENT **
     //**********************
-    echo \local_selfservehd\Base::getServiceHours();
+    echo trim(($CFG->selfservehd_sms_agent_numbers));
+
+    if (($CFG->selfservehd_sms_apikey == true) && ($CFG->selfservehd_sms_agent_numbers == true)) {
+        $client = new SoapClient('http://www.smsgateway.ca/sendsms.asmx?WSDL');
+        $cellNumbers = explode(',', $CFG->selfservehd_sms_agent_numbers);
+        if (count($cellNumbers) > 1) {
+            $parameters = new SMSBulkParam();
+            $parameters->AccountKey = trim($CFG->selfservehd_sms_apikey);
+            $parameters->MessageBody = "Test message";
+            $parameters->Reference = "511";
+            $parameters->CellNumbers = $cellNumbers;
+            $Result = $client->SendBulkMessage($parameters);
+        } else {
+            $parameters = new SMSSingleParam();
+            $parameters->AccountKey = trim($CFG->selfservehd_sms_apikey);
+            $parameters->MessageBody = "Test message";
+            $parameters->Reference = "511";
+            $parameters->CellNumber = trim($CFG->selfservehd_sms_agent_numbers);
+            $Result = $client->SendMessage($parameters);
+        }
+    }
     //**********************
     //*** DISPLAY FOOTER ***
     //**********************

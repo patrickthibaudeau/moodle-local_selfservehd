@@ -36,6 +36,8 @@ $string['agent'] = 'Agent';
 $string['agent_has_been_called'] = 'A notification has been sent to the call center. Waiting for an agent to reply.';
 $string['agent_on_the_way'] = 'will be serving you within 5 minutes.';
 $string['agent_panel'] = 'Agent panel';
+$string['agent_phone_numbers'] = 'Agent cell phone numbers';
+$string['agent_phone_numbers_help'] = 'Enter you agents cell phone numers. Seperate each numer with a comma.';
 $string['associated_faq'] = 'Associated FAQ';
 $string['building_abbreviation'] = 'Build short name';
 $string['building_name'] = 'Building name';
@@ -105,6 +107,9 @@ $string['service_hours_help'] = 'You can add the hours your service is available
         . '</code><br><br>'
         . 'Note the commas seperating the days.';
 $string['services_closed'] = 'No service currently available';
+$string['sms_settings'] = 'SMS Settings';
+$string['sms_apikey'] = 'API Key';
+$string['sms_apikey_help'] = 'Enter the API Key for Swith SMS Gateway (https://smsgateway.ca)';
 $string['ticket_system_email'] = 'Ticketing system email';
 $string['ticket_system_email_help'] = 'Enter the email used by your ticketing system to recieve/open tickets.';
 $string['ticketing_system'] = 'Ticketing system';

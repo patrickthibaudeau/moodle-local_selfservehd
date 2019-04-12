@@ -55,5 +55,23 @@ if ($hassiteconfig) {
     $text = get_string('service_hours', 'local_selfservehd');
     $help = get_string('service_hours_help', 'local_selfservehd');
     $params = '';
+    $settings->add(new admin_setting_configtextarea($name, $text, $help, '', PARAM_RAW)); 
+    
+//Heading
+    $name = get_string('sms_settings', 'local_selfservehd');
+    $settings->add(new admin_setting_heading('selfservehd_sms_settings', $name, ''));
+
+//SMS service url
+    $name = 'selfservehd_sms_apikey';
+    $text = get_string('sms_apikey', 'local_selfservehd');
+    $help = get_string('sms_apikey_help', 'local_selfservehd');
+    $params = '';
+    $settings->add(new admin_setting_configtextarea($name, $text, $help, '', PARAM_RAW)); 
+    
+//SMS agent numbers
+    $name = 'selfservehd_sms_agent_numbers';
+    $text = get_string('agent_phone_numbers', 'local_selfservehd');
+    $help = get_string('agent_phone_numbers_help', 'local_selfservehd');
+    $params = '';
     $settings->add(new admin_setting_configtextarea($name, $text, $help, '', PARAM_RAW));  
 }
