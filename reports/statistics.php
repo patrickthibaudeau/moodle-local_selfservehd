@@ -13,7 +13,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later  **
  * *************************************************************************
  * ************************************************************************ */
-require_once('config.php');
+require_once('../config.php');
 
 /**
  * Display the content of the page
@@ -37,10 +37,8 @@ function display_page() {
     $pagetitle = get_string('pluginname', 'local_selfservehd');
     $pageheading = get_string('pluginname', 'local_selfservehd');
 
-    echo \local_selfservehd\Base::page($CFG->wwwroot . '/local/selfservehd/test.php',
+    echo \local_selfservehd\Base::page($CFG->wwwroot . '/local/selfservehd/index.php',
             $pagetitle, $pageheading, $context);
-
-
 
     $HTMLcontent = '';
     //**********************
@@ -50,15 +48,11 @@ function display_page() {
     //**********************
     //*** DISPLAY CONTENT **
     //**********************
-    echo trim(($CFG->selfservehd_sms_agent_numbers));
-
-    $stats = \local_selfservehd\Statistics::getDeviceCalls();
-    print_object($stats);
-    $chart = new \core\chart_pie();
-    $chart->add_series($stats['data']);
-    $chart->set_labels($stats['labels']);
-
-    echo $OUTPUT->render($chart);
+    $output = $PAGE->get_renderer('local_selfservehd');
+    $statistics = new \local_selfservehd\output\statistics();
+    echo '<div id="statisticsContainer">';    
+    echo $output->render_statistics($statistics);
+    echo '</div>';
     //**********************
     //*** DISPLAY FOOTER ***
     //**********************
@@ -67,4 +61,3 @@ function display_page() {
 
 display_page();
 ?>
-

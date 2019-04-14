@@ -25,3 +25,4 @@ require_once($CFG->dirroot . '/local/selfservehd/classes/FaqAlert.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/FaqAlerts.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/RaspberryPi.php');
 require_once($CFG->dirroot . '/local/selfservehd/classes/RaspberryPis.php');
+require_once($CFG->dirroot . '/local/selfservehd/classes/Statistics.php');

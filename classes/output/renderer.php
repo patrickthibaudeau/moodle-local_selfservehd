@@ -51,6 +51,11 @@ class renderer extends \plugin_renderer_base {
         $data = $logs->export_for_template($this);
         return $this->render_from_template('local_selfservehd/logs', $data);
     }
+    
+    public function render_statistics(\templatable $statistics) {
+        $data = $statistics->export_for_template($this);
+        return $this->render_from_template('local_selfservehd/statistics', $data);
+    }
 
     
 }
