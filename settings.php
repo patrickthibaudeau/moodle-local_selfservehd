@@ -7,6 +7,14 @@ if ($hassiteconfig) {
 
     $ADMIN->add('localplugins', $settings);
     $settings->add(new admin_setting_heading('raspberrypi_heading', get_string('raspberry_pi_settings', 'local_selfservehd'), ''));
+    
+//USe automatic redirection
+    $name = 'selfservehd_auto_redirect';
+    $text = get_string('redirect_users', 'local_selfservehd');
+    $help = get_string('redirect_users_help', 'local_selfservehd');
+    $params = '';
+    $settings->add(new admin_setting_configcheckbox($name, $text, $help, '0', get_string('yes'), get_String('no')));
+    
     //Pi User name
     $name = 'selfservehd_pi_username';
     $text = get_string('username', 'local_selfservehd');
