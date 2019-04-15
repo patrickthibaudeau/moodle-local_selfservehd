@@ -52,13 +52,8 @@ function display_page() {
     //**********************
     echo trim(($CFG->selfservehd_sms_agent_numbers));
 
-    $stats = \local_selfservehd\Statistics::getDeviceCalls();
-    print_object($stats);
-    $chart = new \core\chart_pie();
-    $chart->add_series($stats['data']);
-    $chart->set_labels($stats['labels']);
-
-    echo $OUTPUT->render($chart);
+    $stats = \local_selfservehd\Statistics::getDifferenceTimeCreatedTimeReplied();
+    print_object(gmdate('H:i:s',$stats['avg']));
     //**********************
     //*** DISPLAY FOOTER ***
     //**********************

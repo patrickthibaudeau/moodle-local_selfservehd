@@ -70,4 +70,29 @@ class Statistics {
         
         return $data;
     }
+    
+    public static function getDifferenceTimeCreatedTimeReplied() {
+        global $DB;
+        
+        $averageSql = "SELECT AVG(diff) as average_time FROM (SELECT timereplied-timecreated as diff FROM {local_sshd_call_log} WHERE timereplied != 0) count ";
+        $average = $DB->get_record_sql($averageSql);
+        
+        $minimumSql = "SELECT MIN(timereplied-timecreated) as total FROM {local_sshd_call_log} WHERE timereplied != 0";
+        $minimum = $DB->get_record_sql($minimumSql);
+        
+        $maximumSql = "SELECT MAX(timereplied-timecreated) as total FROM {local_sshd_call_log} WHERE timereplied != 0";
+        $maximum = $DB->get_record_sql($maximumSql);
+        
+        $totalCallsSql = "SELECT COUNT(id) as total FROM {local_sshd_call_log} WHERE timereplied != 0";
+        $totalCalls = $DB->get_record_sql($totalCallsSql);
+        
+        $respondTime = [
+            'numberOfCalls' => $totalCalls->total,
+            'avg' => $average->average_time,
+            'shortest' => $minimum->total,
+            'longest' => $maximum->total
+        ];
+        
+        return $respondTime;        
+    }
 }

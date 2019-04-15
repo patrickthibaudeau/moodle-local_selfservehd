@@ -29,11 +29,17 @@ class statistics implements \renderable, \templatable {
      */
     public function export_for_template(\renderer_base $output) {
         global $CFG, $USER, $DB;
+        
+        $responseTimes = \local_selfservehd\Statistics::getDifferenceTimeCreatedTimeReplied(); 
 
         $data = [
             'wwwroot' => $CFG->wwwroot,
             'callsToRoom' => $this->callsToRoom(),
             'agents' => $this->agents(),
+            'averageResponse' => $this->convertToReadableTime($responseTimes['avg']),
+            'longestResponse' => $this->convertToReadableTime($responseTimes['longest']),
+            'shortestResponse' => $this->convertToReadableTime($responseTimes['shortest']),
+            'totalCalls' => $responseTimes['numberOfCalls'],
         ];
 
         return $data;
@@ -42,7 +48,8 @@ class statistics implements \renderable, \templatable {
     private function callsToRoom() {
         global $OUTPUT;
         $stats = \local_selfservehd\Statistics::getDeviceCalls();
-        $chart = new \core\chart_pie();
+        $chart = new \core\chart_bar();
+        $chart->set_horizontal(true);
         $chart->add_series($stats['data']);
         $chart->set_labels($stats['labels']);
         
@@ -59,4 +66,7 @@ class statistics implements \renderable, \templatable {
         return $OUTPUT->render($chart);
     }
 
+    private function convertToReadableTime($valueInSeconds) {
+        return gmdate('H:i:s', $valueInSeconds);
+    }
 }
