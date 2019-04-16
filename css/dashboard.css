@@ -28,3 +28,9 @@ and open the template in the editor.
 .card-deck .card {
     flex-basis: calc(20% - 30px);
 }
+
+@media (max-width: 999px) {
+    .col-xs-1 {
+        display: none;
+    }
+}

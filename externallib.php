@@ -181,6 +181,7 @@ class local_selfservehd_external extends external_api {
 
             //Send SMS message
             if (($CFG->selfservehd_sms_apikey == true) && ($CFG->selfservehd_sms_agent_numbers == true)) {
+                $message .= "\n\n$CFG->wwwroot/local/selfservehd/agent/index.php";
                 $client = new SoapClient('http://www.smsgateway.ca/sendsms.asmx?WSDL');
                 $cellNumbers = explode(',', $CFG->selfservehd_sms_agent_numbers);
                 if (count($cellNumbers) > 1) {
