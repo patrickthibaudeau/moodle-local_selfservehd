@@ -13,7 +13,7 @@ if ($hassiteconfig) {
     $text = get_string('redirect_users', 'local_selfservehd');
     $help = get_string('redirect_users_help', 'local_selfservehd');
     $params = '';
-    $settings->add(new admin_setting_configcheckbox($name, $text, $help, '0', get_string('yes'), get_String('no')));
+    $settings->add(new admin_setting_configcheckbox($name, $text, $help, '0'));
     
     //Pi User name
     $name = 'selfservehd_pi_username';

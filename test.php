@@ -51,9 +51,7 @@ function display_page() {
     //*** DISPLAY CONTENT **
     //**********************
     echo trim(($CFG->selfservehd_sms_agent_numbers));
-
-    $stats = \local_selfservehd\Statistics::getDifferenceTimeCreatedTimeReplied();
-    print_object(gmdate('H:i:s',$stats['avg']));
+echo '$CFG->selfservehd_auto_redirect: ' . $CFG->selfservehd_auto_redirect;
     //**********************
     //*** DISPLAY FOOTER ***
     //**********************

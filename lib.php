@@ -67,4 +67,5 @@ function redirect_user($events) {
     if ((has_capability('local/selfservehd:agent', $context)) && ($CFG->selfservehd_auto_redirect == true)) {
             redirect($CFG->wwwroot . '/local/selfservehd/agent');
     }
+    return false;
 }
