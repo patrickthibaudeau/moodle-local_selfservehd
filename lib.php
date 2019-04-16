@@ -61,7 +61,7 @@ function local_selfservehd_pluginfile($course, $cm, $context, $filearea, $args,
     send_stored_file($file, 0, 0, $forcedownload, $options);
 }
 
-function redirect_user($events) {
+function redirect_agents($events) {
     global $CFG;
     $context = context_system::instance();
     if ((has_capability('local/selfservehd:agent', $context)) && ($CFG->selfservehd_auto_redirect == true)) {
