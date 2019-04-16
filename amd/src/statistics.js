@@ -16,9 +16,13 @@ define(['jquery', 'jqueryui', 'local_selfservehd/daterangepicker'], function ($,
      */
     function datePicker() {
         var wwwroot = M.cfg.wwwroot;
-        
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        console.log(startDate);
         $('#dateRange').daterangepicker({
-            opens: 'left'
+            opens: 'left',
+            startDate: startDate,
+            endDate: endDate,
         });
 
         $('#dateRange').change(function () {

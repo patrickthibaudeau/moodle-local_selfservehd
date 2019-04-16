@@ -30,7 +30,7 @@ class statistics implements \renderable, \templatable {
 
     public function __construct($from = null, $to = null) {
         $this->from = $from;
-        $this->$to = $to;
+        $this->to = $to;
     }
 
     /**
@@ -42,9 +42,9 @@ class statistics implements \renderable, \templatable {
      */
     public function export_for_template(\renderer_base $output) {
         global $CFG, $USER, $DB;
-        
-        $responseTimes = \local_selfservehd\Statistics::getDifferenceTimeCreatedTimeReplied($this->from, $this->to); 
 
+        $responseTimes = \local_selfservehd\Statistics::getDifferenceTimeCreatedTimeReplied($this->from, $this->to); 
+               
         $data = [
             'wwwroot' => $CFG->wwwroot,
             'callsToRoom' => $this->callsToRoom(),
@@ -53,6 +53,8 @@ class statistics implements \renderable, \templatable {
             'longestResponse' => $this->convertToReadableTime($responseTimes['longest']),
             'shortestResponse' => $this->convertToReadableTime($responseTimes['shortest']),
             'totalCalls' => $responseTimes['numberOfCalls'],
+            'startDate' => $this->convertToDate($this->from),
+            'endDate' => $this->convertToDate($this->to),
         ];
 
         return $data;
@@ -81,5 +83,9 @@ class statistics implements \renderable, \templatable {
 
     private function convertToReadableTime($valueInSeconds) {
         return gmdate('H:i:s', $valueInSeconds);
+    }
+    
+    private function convertToDate($valueInSeconds) {
+        return date('m/d/Y', $valueInSeconds);
     }
 }

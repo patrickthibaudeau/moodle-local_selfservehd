@@ -36,6 +36,12 @@ function display_page() {
         $dateRange = explode(' - ', $dateRange);
         $from = strtotime($dateRange[0] . ' 00:00:00');
         $to = strtotime($dateRange[1] . ' 23:59:59');
+    } else {
+        //Show whole month
+        $month = date('m', time());
+        $year = date('Y', time());
+        $from = strtotime($month . '/01/' . $year . ' 00:00:00') ;
+        $to = strtotime($month . '/28/' . $year . ' 23:58:59') ;
     }
 
 
