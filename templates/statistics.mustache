@@ -1,13 +1,33 @@
 
 <div class="row">
     <div class="col">
-        <h2>{{#str}}statistics, local_selfservehd{{/str}} 
-            <span class="float-right">
-                <a href="../index.php" class="btn btn-outline-primary" title="{{#str}}dashboard, local_selfservehd{{/str}} ">
-                    {{#str}}dashboard, local_selfservehd{{/str}} 
-                </a>
-            </span>
-        </h2>
+        <div class="row">
+            <div class="col">
+                <div class="h2">{{#str}}statistics, local_selfservehd{{/str}}</div>
+            </div>
+            <div class="col">
+                <div class="form-row float-right">
+                    <div class="col-auto">
+                        <div class="input-group mr-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                            <input type="text" id="dateRange" value="" class="form-control" placeholder="{{#str}}search, local_selfservehd{{/str}}">
+                        </div>
+                    </div>
+<!--                    <div class="col-auto">
+                        <a href="javascript:void(0);" class="btn btn-outline-primary" title=" ">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </div>-->
+                    <div class="col-auto">                
+                        <a href="../index.php" class="btn btn-outline-primary" title="{{#str}}dashboard, local_selfservehd{{/str}} ">
+                            {{#str}}dashboard, local_selfservehd{{/str}} 
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
@@ -40,34 +60,38 @@
                 <h3>{{#str}}response_times, local_selfservehd{{/str}}</h3>
             </div>
             <div class="card-body">                
-                    <div class="card-deck">                    
-                        <div class="card">
-                            <div class="card-body text-center" >
-                                <h3>{{#str}}total_calls, local_selfservehd{{/str}}</h3>
-                                <h2>{{{totalCalls}}}</h2>
-                            </div>
+                <div class="card-deck">                    
+                    <div class="card">
+                        <div class="card-body text-center" >
+                            <h3>{{#str}}total_calls, local_selfservehd{{/str}}</h3>
+                            <h2>{{{totalCalls}}}</h2>
                         </div>
-                        <div class="card">
-                            <div class="card-body text-center" >
-                                <h3>{{#str}}average_time_to_reply, local_selfservehd{{/str}}</h3>
-                                <h2>{{{averageResponse}}}</h2>
-                            </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center" >
+                            <h3>{{#str}}average_time_to_reply, local_selfservehd{{/str}}</h3>
+                            <h2>{{{averageResponse}}}</h2>
                         </div>
-                        <div class="card">
+                    </div>
+                    <div class="card">
                         <div class="card-body text-center">
                             <h3>{{#str}}shortest_time_to_reply, local_selfservehd{{/str}}</h3>
                             <h2 style="color: green;">{{{shortestResponse}}}</h2>
                         </div>
-                        </div>
-                        <div class="card">
+                    </div>
+                    <div class="card">
                         <div class="card-body text-center">
                             <h3>{{#str}}longest_time_to_reply, local_selfservehd{{/str}}</h3>
                             <h2 style="color: red;">{{{longestResponse}}}</h2>
                         </div>
-                        </div>                
+                    </div>                
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-</div>
+{{#js}}
+require(['local_selfservehd/statistics'], function(mod) {
+mod.init();
+});
+{{/js}}

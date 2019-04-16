@@ -29,6 +29,15 @@ function display_page() {
     global $CFG, $OUTPUT, $SESSION, $PAGE, $DB, $COURSE, $USER;
 
     $id = optional_param('id', 0, PARAM_INT); //List id
+    $from = null;
+    $to = null;
+    $dateRange = optional_param('daterange', null, PARAM_TEXT);
+    if (strstr($dateRange, ' - ')) {
+        $dateRange = explode(' - ', $dateRange);
+        $from = strtotime($dateRange[0] . ' 00:00:00');
+        $to = strtotime($dateRange[1] . ' 23:59:59');
+    }
+
 
     require_login(1, false); //Use course 1 because this has nothing to do with an actual course, just like course 1
 
@@ -49,8 +58,8 @@ function display_page() {
     //*** DISPLAY CONTENT **
     //**********************
     $output = $PAGE->get_renderer('local_selfservehd');
-    $statistics = new \local_selfservehd\output\statistics();
-    echo '<div id="statisticsContainer">';    
+    $statistics = new \local_selfservehd\output\statistics($from, $to);
+    echo '<div id="statisticsContainer">';
     echo $output->render_statistics($statistics);
     echo '</div>';
     //**********************

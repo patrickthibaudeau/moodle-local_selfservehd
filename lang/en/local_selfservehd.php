@@ -89,6 +89,7 @@ $string['room'] = 'Room';
 $string['room_number'] = 'Room number';
 $string['room_not_set'] = 'Room not set';
 $string['save'] = 'Save';
+$string['search'] = 'Search';
 $string['service_hours'] = 'Service hours';
 $string['site_url'] = 'Agent site url';
 $string['site_url_help'] = 'AThis site is used on the agent page. Usually, this would be a ticketing system.';

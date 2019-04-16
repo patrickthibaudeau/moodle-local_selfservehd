@@ -15,9 +15,22 @@ namespace local_selfservehd\output;
  * @return array
  */
 class statistics implements \renderable, \templatable {
+    
+    /**
+     *
+     * @var int
+     */
+    private $from;
+    
+    /**
+     *
+     * @var int 
+     */
+    private $to;
 
-    public function __construct() {
-        
+    public function __construct($from = null, $to = null) {
+        $this->from = $from;
+        $this->$to = $to;
     }
 
     /**
@@ -30,7 +43,7 @@ class statistics implements \renderable, \templatable {
     public function export_for_template(\renderer_base $output) {
         global $CFG, $USER, $DB;
         
-        $responseTimes = \local_selfservehd\Statistics::getDifferenceTimeCreatedTimeReplied(); 
+        $responseTimes = \local_selfservehd\Statistics::getDifferenceTimeCreatedTimeReplied($this->from, $this->to); 
 
         $data = [
             'wwwroot' => $CFG->wwwroot,
@@ -47,7 +60,7 @@ class statistics implements \renderable, \templatable {
 
     private function callsToRoom() {
         global $OUTPUT;
-        $stats = \local_selfservehd\Statistics::getDeviceCalls();
+        $stats = \local_selfservehd\Statistics::getDeviceCalls($this->from, $this->to);
         $chart = new \core\chart_bar();
         $chart->set_horizontal(true);
         $chart->add_series($stats['data']);
@@ -58,7 +71,7 @@ class statistics implements \renderable, \templatable {
     
     private function agents() {
         global $OUTPUT;
-        $stats = \local_selfservehd\Statistics::getAgents();
+        $stats = \local_selfservehd\Statistics::getAgents($this->from, $this->to);
         $chart = new \core\chart_pie();
         $chart->add_series($stats['data']);
         $chart->set_labels($stats['labels']);
