@@ -1,4 +1,6 @@
-
+# -----------------------------------------------------
+# | DO NOT USE. I HAVE REPLACED WITH A NEW REPOSITORY |
+# -----------------------------------------------------
 
 # Self Serve Helpdesk
 The system will be used at York University's Glendon Campus. There are two modules to the system.
