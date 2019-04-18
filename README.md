@@ -1,5 +1,5 @@
 # -----------------------------------------------------
-# | DO NOT USE. I HAVE REPLACED WITH A NEW REPOSITORY |
+#  DO NOT USE. I HAVE REPLACED WITH A NEW REPOSITORY 
 # -----------------------------------------------------
 
 # Self Serve Helpdesk
